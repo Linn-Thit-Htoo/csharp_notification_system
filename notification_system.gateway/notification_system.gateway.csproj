@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <Content Remove="C:\Users\USER\.nuget\packages\ppm.ocelot\1.0.5\contentFiles\any\net8.0\ocelot.Development.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="PPM.Ocelot" Version="1.0.5" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+	</ItemGroup>
+
+</Project>
