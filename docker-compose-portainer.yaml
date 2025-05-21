@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  portainer:
+    image: portainer/portainer-ce
+    ports:
+      - "9000:9000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer_data:/data"
+    networks:
+      - services_infra
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  portainer_data:
+
+networks:
+  notification_system:
+    external: true

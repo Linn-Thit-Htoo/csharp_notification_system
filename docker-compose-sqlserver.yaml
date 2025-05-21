@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "sasa@123"
+    ports:
+      - "11433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+    networks:
+      - notification_system
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+volumes:
+  sqlserverdata:
+
+networks:
+  notification_system:
+    external: true
