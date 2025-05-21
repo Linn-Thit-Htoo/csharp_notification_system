@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documents", "documents", "{8808C351-6535-4C16-BEA5-6962F6A4F66E}"
 	ProjectSection(SolutionItems) = preProject
+		commands.txt = commands.txt
 		docker-compose-portainer.yaml = docker-compose-portainer.yaml
 		docker-compose-sqlserver.yaml = docker-compose-sqlserver.yaml
 		docker-compose.yaml = docker-compose.yaml
