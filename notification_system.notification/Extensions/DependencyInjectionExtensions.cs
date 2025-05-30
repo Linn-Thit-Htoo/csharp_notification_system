@@ -6,6 +6,7 @@ using notification_system.notification.Configurations;
 using notification_system.notification.Entities;
 using notification_system.notification.Exceptions;
 using notification_system.notification.Features.Email.SendEmail;
+using notification_system.notification.Features.Otp.RequestOtp;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
 using notification_system.notification.Utils;
@@ -78,8 +79,22 @@ namespace notification_system.notification.Extensions
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmailService, EmailService>();
             builder.Services.AddValidatorsFromAssembly(typeof(DependencyInjectionExtensions).Assembly);
-            builder.Services.AddScoped<BL_SendEmail>();
+            builder.Services.AddBusinessLogicServices();
+            builder.Services.AddDataAccessServices();
 
+            return services;
+        }
+
+        private static IServiceCollection AddBusinessLogicServices(this IServiceCollection services)
+        {
+            services.AddScoped<BL_SendEmail>();
+            services.AddScoped<BL_RequestOtp>();
+            return services;
+        }
+
+        private static IServiceCollection AddDataAccessServices(this IServiceCollection services)
+        {
+            services.AddScoped<DA_RequestOtp>();
             return services;
         }
     }

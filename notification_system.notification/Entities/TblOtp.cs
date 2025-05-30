@@ -9,6 +9,8 @@ public partial class TblOtp
 
     public int OtpValue { get; set; }
 
+    public string Email { get; set; } = null!;
+
     public DateTime CreatedAt { get; set; }
 
     public DateTime ExpiredAt { get; set; }

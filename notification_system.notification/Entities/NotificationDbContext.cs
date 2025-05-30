@@ -64,6 +64,7 @@ public partial class NotificationDbContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
+            entity.Property(e => e.Email).HasMaxLength(50);
             entity.Property(e => e.ExpiredAt).HasColumnType("datetime");
         });
 

@@ -2,5 +2,6 @@
 {
     public class RequestOtpRequest
     {
+        public string Email { get; set; }
     }
 }

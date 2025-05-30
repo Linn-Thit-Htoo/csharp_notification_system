@@ -2,5 +2,7 @@
 {
     public class RequestOtpResponse
     {
+        public int Otp { get; set; }
+        public DateTime ExpiredAt { get; set; }
     }
 }
