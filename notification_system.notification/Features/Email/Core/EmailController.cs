@@ -21,5 +21,12 @@ namespace notification_system.notification.Features.Email.Core
             var result = await _bL_SendEmail.SendSingleEmailAsync(request, cs);
             return Content(result);
         }
+
+        [HttpPost(("SendMultipleEmail"))]
+        public async Task<IActionResult> SendMultipleEmail(SendEmailMultipleRequest request, CancellationToken cs)
+        {
+            var result = await _bL_SendEmail.SendMultipleEmailAsync(request, cs);
+            return Content(result);
+        }
     }
 }
