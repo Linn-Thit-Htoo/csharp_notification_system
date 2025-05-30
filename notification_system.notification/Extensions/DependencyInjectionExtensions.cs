@@ -7,6 +7,7 @@ using notification_system.notification.Entities;
 using notification_system.notification.Exceptions;
 using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Features.Otp.RequestOtp;
+using notification_system.notification.Features.Otp.VerifyOtp;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
 using notification_system.notification.Utils;
@@ -89,12 +90,14 @@ namespace notification_system.notification.Extensions
         {
             services.AddScoped<BL_SendEmail>();
             services.AddScoped<BL_RequestOtp>();
+            services.AddScoped<BL_VerifyOtp>();
             return services;
         }
 
         private static IServiceCollection AddDataAccessServices(this IServiceCollection services)
         {
             services.AddScoped<DA_RequestOtp>();
+            services.AddScoped<DA_VerifyOtp>();
             return services;
         }
     }
