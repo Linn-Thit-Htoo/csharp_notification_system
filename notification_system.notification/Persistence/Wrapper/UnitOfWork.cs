@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using notification_system.notification.Entities;
+using notification_system.notification.Features.NotificationLogs.Core;
 using System.Reflection;
 using System.Security.Claims;
 
@@ -27,6 +28,8 @@ namespace notification_system.notification.Persistence.Wrapper
                         .Value;
                 }
             }
+
+            NotificationLogRepository = new NotificationLogRepository(_context);
         }
 
         public void SaveChanges()
@@ -94,5 +97,7 @@ namespace notification_system.notification.Persistence.Wrapper
 
             await _context.SaveChangesAsync(cs);
         }
+
+        public INotificationLogRepository NotificationLogRepository { get; set; }
     }
 }

@@ -2,5 +2,7 @@
 {
     public class NotificationTypeConstant
     {
+        public const string Email = "Email";
+        public const string SMS = "SMS";
     }
 }

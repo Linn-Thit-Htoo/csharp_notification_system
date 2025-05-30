@@ -2,8 +2,14 @@
 {
     public class AppSetting
     {
+        public Connectionstrings ConnectionStrings { get; set; }
         public Logging Logging { get; set; }
         public Sendgrid SendGrid { get; set; }
+    }
+
+    public class Connectionstrings
+    {
+        public string NotiConnection { get; set; }
     }
 
     public class Logging
