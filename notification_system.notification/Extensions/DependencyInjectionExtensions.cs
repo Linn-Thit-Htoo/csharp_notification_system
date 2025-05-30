@@ -10,6 +10,7 @@ using notification_system.notification.Features.Otp.RequestOtp;
 using notification_system.notification.Features.Otp.VerifyOtp;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
+using notification_system.notification.Services.RabbitMQ;
 using notification_system.notification.Utils;
 
 namespace notification_system.notification.Extensions
@@ -82,6 +83,7 @@ namespace notification_system.notification.Extensions
             builder.Services.AddValidatorsFromAssembly(typeof(DependencyInjectionExtensions).Assembly);
             builder.Services.AddBusinessLogicServices();
             builder.Services.AddDataAccessServices();
+            builder.Services.AddHostedService<RabbitMQService>();
 
             return services;
         }

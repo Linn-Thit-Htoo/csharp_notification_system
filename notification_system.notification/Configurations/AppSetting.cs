@@ -7,6 +7,7 @@
         public Sendgrid SendGrid { get; set; }
         public Otpconfig OtpConfig { get; set; }
         public Rabbitmq RabbitMQ { get; set; }
+        public Consul Consul { get; set; }
     }
 
     public class Connectionstrings
@@ -50,5 +51,15 @@
         public string Exchange { get; set; }
         public string Queue { get; set; }
         public string RoutingKey { get; set; }
+    }
+
+    public class Consul
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public int Port { get; set; }
+        public string DiscoveryAddress { get; set; }
+        public string HealthCheckEndPoint { get; set; }
     }
 }
