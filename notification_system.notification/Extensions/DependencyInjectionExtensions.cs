@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using notification_system.notification.Configurations;
 using notification_system.notification.Entities;
 using notification_system.notification.Exceptions;
+using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
 using notification_system.notification.Utils;
@@ -75,6 +77,8 @@ namespace notification_system.notification.Extensions
             builder.Services.Configure<AppSetting>(builder.Configuration);
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmailService, EmailService>();
+            builder.Services.AddValidatorsFromAssembly(typeof(DependencyInjectionExtensions).Assembly);
+            builder.Services.AddScoped<BL_SendEmail>();
 
             return services;
         }

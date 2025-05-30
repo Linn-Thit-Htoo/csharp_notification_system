@@ -84,6 +84,7 @@ namespace notification_system.notification.Services.EmailServices
             catch (Exception ex)
             {
                 _logger.LogError($"Sending Single Notification Error: {ex.ToString()}");
+                throw;
             }
         }
 
@@ -156,6 +157,7 @@ namespace notification_system.notification.Services.EmailServices
             catch (Exception ex)
             {
                 _logger.LogError($"Sending Single Notification Error: {ex.ToString()}");
+                throw;
             }
         }
     }
