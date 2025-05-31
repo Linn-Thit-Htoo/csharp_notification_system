@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "notification_system.gateway
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "notification_system.notification", "notification_system.notification\notification_system.notification.csproj", "{56B71AAE-99AA-41F9-9947-8B7C05D2E064}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "notification_system.notification_consumer", "notification_system.notification_consumer\notification_system.notification_consumer.csproj", "{BB4F4DD9-E4AA-4140-B37F-9FAD2C8C0CCD}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "documents", "documents", "{8808C351-6535-4C16-BEA5-6962F6A4F66E}"
@@ -33,10 +31,6 @@ Global
 		{56B71AAE-99AA-41F9-9947-8B7C05D2E064}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56B71AAE-99AA-41F9-9947-8B7C05D2E064}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56B71AAE-99AA-41F9-9947-8B7C05D2E064}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BB4F4DD9-E4AA-4140-B37F-9FAD2C8C0CCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BB4F4DD9-E4AA-4140-B37F-9FAD2C8C0CCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BB4F4DD9-E4AA-4140-B37F-9FAD2C8C0CCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BB4F4DD9-E4AA-4140-B37F-9FAD2C8C0CCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,7 +38,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{B90259E3-E0BF-4E87-ABDA-85731F65B7F9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{56B71AAE-99AA-41F9-9947-8B7C05D2E064} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{BB4F4DD9-E4AA-4140-B37F-9FAD2C8C0CCD} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D25069EC-8D93-4DA4-A2C1-576B193EE133}

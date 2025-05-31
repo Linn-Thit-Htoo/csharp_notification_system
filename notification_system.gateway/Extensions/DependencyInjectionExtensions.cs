@@ -1,4 +1,11 @@
-﻿namespace notification_system.gateway.Extensions
+﻿using Consul;
+using Microsoft.Extensions.Options;
+using notification_system.gateway.Configurations;
+using notification_system.gateway.Services.ServiceDiscovery;
+using Ocelot.DependencyInjection;
+using Ocelot.Provider.Consul;
+
+namespace notification_system.gateway.Extensions
 {
     public static class DependencyInjectionExtensions
     {
@@ -22,8 +29,40 @@
             {
                 opt.JsonSerializerOptions.PropertyNamingPolicy = null;
             });
+
+            if (!builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddConsul(builder);
+                builder.Services.AddHostedService<ConsulService>();
+            }
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder
+                .Services.AddOcelot()
+                .AddConsul();
+            builder.Services.AddHealthChecks();
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.Configure<AppSetting>(builder.Configuration);
+
+            return services;
+        }
+
+        private static IServiceCollection AddConsul(this IServiceCollection services, WebApplicationBuilder builder)
+        {
+            var scope = builder.Services.BuildServiceProvider().CreateScope();
+            var setting = scope.ServiceProvider.GetRequiredService<IOptions<AppSetting>>().Value;
+
+            var consulClient = new ConsulClient(config =>
+            {
+                config.Address = new Uri(setting.Consul.DiscoveryAddress);
+            });
+
+            services.AddSingleton<IConsulClient, ConsulClient>(_ => consulClient);
+            services.AddHostedService<ConsulService>();
+
+            return services;
         }
     }
 }

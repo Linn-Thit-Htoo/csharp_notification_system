@@ -85,6 +85,7 @@ namespace notification_system.notification.Extensions
             if (!builder.Environment.IsDevelopment())
             {
                 builder.Services.AddConsul(builder);
+                builder.Services.AddHostedService<ConsulService>();
             }
 
             builder.Services.AddEndpointsApiExplorer();
@@ -100,13 +101,12 @@ namespace notification_system.notification.Extensions
             builder.Services.AddBusinessLogicServices();
             builder.Services.AddDataAccessServices();
             builder.Services.AddHostedService<RabbitMQService>();
-            builder.Services.AddHostedService<ConsulService>();
             builder.Services.AddScoped<IPushNotiService, PushNotiService>();
 
             return services;
         }
 
-        public static IServiceCollection AddConsul(this IServiceCollection services, WebApplicationBuilder builder)
+        private static IServiceCollection AddConsul(this IServiceCollection services, WebApplicationBuilder builder)
         {
             var scope = builder.Services.BuildServiceProvider().CreateScope();
             var setting = scope.ServiceProvider.GetRequiredService<IOptions<AppSetting>>().Value;

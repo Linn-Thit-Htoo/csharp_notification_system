@@ -1,6 +1,0 @@
-@notification_system.notification_consumer_HostAddress = http://localhost:5113
-
-GET {{notification_system.notification_consumer_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
