@@ -5,31 +5,64 @@
   },
   "Routes": [
     {
-      "UpstreamPathTemplate": "/api/gateway/Blog/{everything}",
-      "UpstreamHttpMethod": [ "GET", "POST", "PUT", "DELETE" ],
+      "UpstreamPathTemplate": "/api/gateway/Notification/Email/{everything}",
+      "UpstreamHttpMethod": [ "POST" ],
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5027
+          "Port": 5275
         }
       ],
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },
-      "DownstreamPathTemplate": "/api/Blog/{everything}",
-      "DownstreamScheme": "http",
-      "RateLimitOptions": {
-        "ClientWhitelist": [],
-        "EnableRateLimiting": true,
-        "PeriodTimespan": 100,
-        "Limit": 1
+      "DownstreamPathTemplate": "/api/v1/Email/{everything}",
+      "DownstreamScheme": "http"
+    },
+    {
+      "UpstreamPathTemplate": "/api/gateway/Notification/Otp/{everything}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5275
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
       },
-      "ServiceName": "blog",
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": [ "admin" ]
+      "DownstreamPathTemplate": "/api/v1/Otp/{everything}",
+      "DownstreamScheme": "http"
+    },
+    {
+      "UpstreamPathTemplate": "/api/gateway/Notification/Otp/{everything}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5275
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
       },
-      "TimeoutValue": 100
+      "DownstreamPathTemplate": "/api/v1/Otp/{everything}",
+      "DownstreamScheme": "http"
+    },
+    {
+      "UpstreamPathTemplate": "/api/gateway/Notification/PushNoti",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5275
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "DownstreamPathTemplate": "/api/v1/PushNoti",
+      "DownstreamScheme": "http"
     }
   ]
 }

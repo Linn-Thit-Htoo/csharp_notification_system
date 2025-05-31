@@ -1,4 +1,5 @@
-﻿using FirebaseAdmin;
+﻿using Consul;
+using FirebaseAdmin;
 using FluentValidation;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +16,7 @@ using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
 using notification_system.notification.Services.PushNoti;
 using notification_system.notification.Services.RabbitMQ;
+using notification_system.notification.Services.ServiceDiscovery;
 using notification_system.notification.Utils;
 
 namespace notification_system.notification.Extensions
@@ -80,6 +82,11 @@ namespace notification_system.notification.Extensions
                 Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "notification-system-b95f7-firebase-adminsdk-fbsvc-e613046e55.json")),
             });
 
+            if (!builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddConsul(builder);
+            }
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddHealthChecks();
@@ -93,7 +100,24 @@ namespace notification_system.notification.Extensions
             builder.Services.AddBusinessLogicServices();
             builder.Services.AddDataAccessServices();
             builder.Services.AddHostedService<RabbitMQService>();
+            builder.Services.AddHostedService<ConsulService>();
             builder.Services.AddScoped<IPushNotiService, PushNotiService>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddConsul(this IServiceCollection services, WebApplicationBuilder builder)
+        {
+            var scope = builder.Services.BuildServiceProvider().CreateScope();
+            var setting = scope.ServiceProvider.GetRequiredService<IOptions<AppSetting>>().Value;
+
+            var consulClient = new ConsulClient(config =>
+            {
+                config.Address = new Uri(setting.Consul.DiscoveryAddress);
+            });
+
+            services.AddSingleton<IConsulClient, ConsulClient>(_ => consulClient);
+            services.AddHostedService<ConsulService>();
 
             return services;
         }
