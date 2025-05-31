@@ -1,17 +1,16 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5282"
+    "ServiceDiscoveryProvider": {
+      "Host": "consul",
+      "Port": 8500,
+      "Type": "Consul"
+    }
   },
   "Routes": [
     {
       "UpstreamPathTemplate": "/api/gateway/Notification/Email/{everything}",
       "UpstreamHttpMethod": [ "POST" ],
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5275
-        }
-      ],
+      "ServiceName": "notification",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },
@@ -21,12 +20,7 @@
     {
       "UpstreamPathTemplate": "/api/gateway/Notification/Otp/{everything}",
       "UpstreamHttpMethod": [ "POST" ],
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5275
-        }
-      ],
+      "ServiceName": "notification",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },
@@ -36,12 +30,7 @@
     {
       "UpstreamPathTemplate": "/api/gateway/Notification/PushNoti",
       "UpstreamHttpMethod": [ "POST" ],
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 5275
-        }
-      ],
+      "ServiceName": "notification",
       "LoadBalancerOptions": {
         "Type": "RoundRobin"
       },

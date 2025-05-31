@@ -33,20 +33,16 @@ namespace notification_system.notification.Services.ServiceDiscovery
                 },
             };
 
-            await _client
-                .Agent.ServiceDeregister(_registration.ID, cancellationToken)
-                .ConfigureAwait(false);
-
             await _client.Agent.ServiceRegister(_registration, cancellationToken).ConfigureAwait(false);
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
         {
-            var registration = new AgentServiceRegistration { ID = _setting.Consul.Id };
+            //var registration = new AgentServiceRegistration { ID = _setting.Consul.Id };
 
-            await _client
-                .Agent.ServiceDeregister(_registration.ID, cancellationToken)
-                .ConfigureAwait(false);
+            //await _client
+            //    .Agent.ServiceDeregister(_registration.ID, cancellationToken)
+            //    .ConfigureAwait(false);
         }
     }
 }

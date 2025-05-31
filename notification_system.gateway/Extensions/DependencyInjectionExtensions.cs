@@ -51,12 +51,9 @@ namespace notification_system.gateway.Extensions
 
         private static IServiceCollection AddConsul(this IServiceCollection services, WebApplicationBuilder builder)
         {
-            var scope = builder.Services.BuildServiceProvider().CreateScope();
-            var setting = scope.ServiceProvider.GetRequiredService<IOptions<AppSetting>>().Value;
-
             var consulClient = new ConsulClient(config =>
             {
-                config.Address = new Uri(setting.Consul.DiscoveryAddress);
+                config.Address = new Uri(builder.Configuration["Consul:DiscoveryAddress"]!);
             });
 
             services.AddSingleton<IConsulClient, ConsulClient>(_ => consulClient);

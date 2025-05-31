@@ -1,0 +1,115 @@
+services:
+  consul:
+    image: hashicorp/consul:latest
+    ports:
+      - "8500:8500"
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+    networks:
+      - notification_system
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "256M"
+
+  notification:
+    image: notification:v1
+    ports:
+      - "5275:80"
+    networks:
+      - notification_system
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "150M"
+      restart_policy:
+        condition: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+    depends_on:
+      - rabbitmq
+      - consul
+    hostname: notification
+    
+  notigw:
+    image: notigw:v1
+    ports:
+      - "5282:80"
+    networks:
+      - notification_system
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: "0.6"
+          memory: "150M"
+      restart_policy:
+        condition: on-failure
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Staging
+    depends_on:
+      - consul
+      - rabbitmq
+    hostname: notigw
+
+  seq:
+    image: datalust/seq:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    hostname: seq
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - seq-data:/data
+    networks:
+      - notification_system
+
+  rabbitmq:
+    image: rabbitmq:management
+    hostname: rabbitmq
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - notification_system
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "sasa@123"
+    ports:
+      - "11433:1433"
+    volumes:
+      - sqlserverdata:/var/opt/mssql
+    networks:
+      - notification_system
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+networks:
+  notification_system:
+    external: true
+
+volumes:
+  seq-data:
+  sqlserverdata:
