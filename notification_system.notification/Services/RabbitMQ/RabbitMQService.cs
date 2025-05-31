@@ -1,9 +1,12 @@
 ﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using notification_system.notification.Configurations;
+using notification_system.notification.Extensions;
 using notification_system.notification.Features.Email.SendEmail;
+using notification_system.notification.Features.PushNoti;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
+using notification_system.notification.Services.PushNoti;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -44,17 +47,24 @@ namespace notification_system.notification.Services.RabbitMQ
                         var serviceProvider = _serviceScopeFactory.CreateScope().ServiceProvider;
                         var unitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
                         var emailService = serviceProvider.GetRequiredService<IEmailService>();
+                        var pushNotiService = serviceProvider.GetRequiredService<IPushNotiService>();
 
                         if (item.RoutingKey.Equals("single_email_direct"))
                         {
-                            var requestModel = JsonConvert.DeserializeObject<SendEmailRequest>(content)!;
+                            var requestModel = content.ToObject<SendEmailRequest>();
                             await emailService.SendEmailAsync(requestModel);
                         }
 
                         if (item.RoutingKey.Equals("multiple_email_direct"))
                         {
-                            var requestModel = JsonConvert.DeserializeObject<SendEmailMultipleRequest>(content)!;
+                            var requestModel = content.ToObject<SendEmailMultipleRequest>();
                             await emailService.SendMultipleEmailAysnc(requestModel);
+                        }
+
+                        if (item.RoutingKey.Equals("pushnoti_direct"))
+                        {
+                            var requestModel = content.ToObject<PushNotiRequest>();
+                            await pushNotiService.PushNotiAsync(requestModel);
                         }
 
                         channel.BasicAck(ea.DeliveryTag, false);
