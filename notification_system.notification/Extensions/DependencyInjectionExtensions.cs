@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using FirebaseAdmin;
+using FluentValidation;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -8,8 +10,10 @@ using notification_system.notification.Exceptions;
 using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Features.Otp.RequestOtp;
 using notification_system.notification.Features.Otp.VerifyOtp;
+using notification_system.notification.Features.PushNoti;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
+using notification_system.notification.Services.PushNoti;
 using notification_system.notification.Services.RabbitMQ;
 using notification_system.notification.Utils;
 
@@ -71,6 +75,11 @@ namespace notification_system.notification.Extensions
                 );
             });
 
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "notification-system-b95f7-firebase-adminsdk-fbsvc-e613046e55.json")),
+            });
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddHealthChecks();
@@ -84,6 +93,7 @@ namespace notification_system.notification.Extensions
             builder.Services.AddBusinessLogicServices();
             builder.Services.AddDataAccessServices();
             builder.Services.AddHostedService<RabbitMQService>();
+            builder.Services.AddScoped<IPushNotiService, PushNotiService>();
 
             return services;
         }
@@ -93,6 +103,7 @@ namespace notification_system.notification.Extensions
             services.AddScoped<BL_SendEmail>();
             services.AddScoped<BL_RequestOtp>();
             services.AddScoped<BL_VerifyOtp>();
+            services.AddScoped<BL_PushNoti>();
             return services;
         }
 

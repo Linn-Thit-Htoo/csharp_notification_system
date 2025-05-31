@@ -72,13 +72,16 @@ namespace notification_system.notification.Services.EmailServices
                     ResponseMessage = null
                 };
 
+                await _unitOfWork.NotificationLogRepository.AddAsync(notiLog, cs);
+                await _unitOfWork.SaveChangesAsync(cs);
+
                 var response = await client.SendEmailAsync(msg, cs);
 
                 notiLog.ResponseAt = DateTime.Now;
                 notiLog.IsSuccess = response.IsSuccessStatusCode;
                 notiLog.ResponseMessage = response.Body is not null ? await response.Body.ReadAsStringAsync(cs) : null;
 
-                await _unitOfWork.NotificationLogRepository.AddAsync(notiLog, cs);
+                _unitOfWork.NotificationLogRepository.Update(notiLog);
                 await _unitOfWork.SaveChangesAsync(cs);
             }
             catch (Exception ex)
