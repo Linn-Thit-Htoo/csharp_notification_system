@@ -47,6 +47,21 @@
       },
       "DownstreamPathTemplate": "/api/v1/PushNoti",
       "DownstreamScheme": "http"
+    },
+    {
+      "UpstreamPathTemplate": "/api/gateway/Notification/SMS/{everything}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5275
+        }
+      ],
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin"
+      },
+      "DownstreamPathTemplate": "/api/v1/SMS/{everything}",
+      "DownstreamScheme": "http"
     }
   ]
 }

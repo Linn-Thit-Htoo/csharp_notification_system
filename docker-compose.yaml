@@ -90,6 +90,22 @@ services:
       restart_policy:
         condition: on-failure
 
+  seq:
+    image: datalust/seq:latest
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+    hostname: seq
+    ports:
+      - "5341:80"
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - seq-data:/data
+    networks:
+      - notification_system
+
 networks:
   notification_system:
     external: true

@@ -20,6 +20,7 @@ using notification_system.notification.Services.RabbitMQ;
 using notification_system.notification.Services.ServiceDiscovery;
 using notification_system.notification.Services.SMSServices;
 using notification_system.notification.Utils;
+using Serilog;
 
 namespace notification_system.notification.Extensions
 {
@@ -84,10 +85,35 @@ namespace notification_system.notification.Extensions
                 Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "notification-system-b95f7-firebase-adminsdk-fbsvc-e613046e55.json")),
             });
 
+            builder.Host.UseSerilog(
+                (context, config) =>
+                {
+                    config
+                        .ReadFrom.Configuration(context.Configuration)
+                        .WriteTo.Console()
+                        .Enrich.FromLogContext()
+                        .Enrich.WithMachineName()
+                        .Enrich.WithEnvironmentName();
+                }
+            );
+
             if (!builder.Environment.IsDevelopment())
             {
                 builder.Services.AddConsul(builder);
                 builder.Services.AddHostedService<ConsulService>();
+
+                builder.Host.UseSerilog(
+                    (context, config) =>
+                    {
+                        config
+                            .ReadFrom.Configuration(context.Configuration)
+                            .WriteTo.Console()
+                            .Enrich.FromLogContext()
+                            .Enrich.WithMachineName()
+                            .Enrich.WithEnvironmentName()
+                            .WriteTo.Seq("http://seq:5341");
+                    }
+                );
             }
 
             builder.Services.AddEndpointsApiExplorer();
