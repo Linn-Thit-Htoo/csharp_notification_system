@@ -1,0 +1,33 @@
+﻿using notification_system.notification.Extensions;
+using notification_system.notification.Services.SMSServices;
+using notification_system.notification.Utils;
+
+namespace notification_system.notification.Features.SMS.SendSMS
+{
+    public class BL_SendSMS
+    {
+        private readonly ITwilioService _twilioService;
+
+        public BL_SendSMS(ITwilioService twilioService)
+        {
+            _twilioService = twilioService;
+        }
+
+        public async Task<BaseResponse<SendSMSResponse>> SendSingleSMSAsync(SendSingleSMSRequest request, CancellationToken cs = default)
+        {
+            BaseResponse<SendSMSResponse> result;
+
+            if (request.ToPhoneNumber.IsNullOrEmpty())
+            {
+                result = BaseResponse<SendSMSResponse>.Fail("To Phone Number cannot be empty.");
+                goto result;
+            }
+
+            await _twilioService.SendSingleSMSAsync(request, cs);
+            result = BaseResponse<SendSMSResponse>.Success();
+
+        result:
+            return result;
+        }
+    }
+}

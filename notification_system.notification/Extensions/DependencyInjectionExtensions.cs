@@ -12,11 +12,13 @@ using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Features.Otp.RequestOtp;
 using notification_system.notification.Features.Otp.VerifyOtp;
 using notification_system.notification.Features.PushNoti;
+using notification_system.notification.Features.SMS.SendSMS;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
 using notification_system.notification.Services.PushNoti;
 using notification_system.notification.Services.RabbitMQ;
 using notification_system.notification.Services.ServiceDiscovery;
+using notification_system.notification.Services.SMSServices;
 using notification_system.notification.Utils;
 
 namespace notification_system.notification.Extensions
@@ -102,6 +104,7 @@ namespace notification_system.notification.Extensions
             builder.Services.AddDataAccessServices();
             builder.Services.AddHostedService<RabbitMQService>();
             builder.Services.AddScoped<IPushNotiService, PushNotiService>();
+            builder.Services.AddScoped<ITwilioService, TwilioService>();
 
             return services;
         }
@@ -125,6 +128,7 @@ namespace notification_system.notification.Extensions
             services.AddScoped<BL_RequestOtp>();
             services.AddScoped<BL_VerifyOtp>();
             services.AddScoped<BL_PushNoti>();
+            services.AddScoped<BL_SendSMS>();
             return services;
         }
 

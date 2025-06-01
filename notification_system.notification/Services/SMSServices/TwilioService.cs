@@ -1,0 +1,84 @@
+﻿using Microsoft.Extensions.Options;
+using Microsoft.Identity.Client;
+using notification_system.notification.Configurations;
+using notification_system.notification.Constants;
+using notification_system.notification.Entities;
+using notification_system.notification.Extensions;
+using notification_system.notification.Features.SMS.SendSMS;
+using notification_system.notification.Persistence.Wrapper;
+using Twilio;
+using Twilio.Rest.Api.V2010.Account;
+using Twilio.Types;
+
+namespace notification_system.notification.Services.SMSServices
+{
+    public class TwilioService : ITwilioService
+    {
+        private readonly AppSetting _setting;
+        private readonly ILogger<TwilioService> _logger;
+        private readonly IUnitOfWork _unitOfWork;
+
+        public TwilioService(IOptions<AppSetting> setting, ILogger<TwilioService> logger, IUnitOfWork unitOfWork)
+        {
+            _setting = setting.Value;
+            _logger = logger;
+            _unitOfWork = unitOfWork;
+        }
+
+        public async Task SendMultipleSMSAsync(SendMultipleSMSRequest request, CancellationToken cs = default)
+        {
+            try
+            {
+                TwilioClient.Init(_setting.Twilio.AccountSid, _setting.Twilio.AuthToken);
+                foreach (var item in request.ToPhoneNumbers)
+                {
+                    var message = await MessageResource.CreateAsync(
+                        body: "This is a bulk message from Twilio!",
+                        from: new Twilio.Types.PhoneNumber(_setting.Twilio.FromPhoneNumber),
+                        to: new Twilio.Types.PhoneNumber(item)
+                    );
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Send Multiple SMS Error: {ex.ToString()}");
+            }
+        }
+
+        public async Task SendSingleSMSAsync(SendSingleSMSRequest request, CancellationToken cs = default)
+        {
+            try
+            {
+                TwilioClient.Init(_setting.Twilio.AccountSid, _setting.Twilio.AuthToken);
+
+                var notiLog = new TblNotificationLog()
+                {
+                    LogId = Ulid.NewUlid().ToString(),
+                    ToPhoneList = request.ToPhoneNumber.ToJson(),
+                    Payload = request.Messasge,
+                    CreatedAt = DateTime.Now,
+                    LogType = NotificationTypeConstant.SMS
+                };
+                await _unitOfWork.NotificationLogRepository.AddAsync(notiLog, cs);
+                await _unitOfWork.SaveChangesAsync(cs);
+
+                var message = await MessageResource.CreateAsync(
+                    body: request.Messasge,
+                    from: new PhoneNumber(_setting.Twilio.FromPhoneNumber),
+                    to: new PhoneNumber(request.ToPhoneNumber)
+                );
+
+                notiLog.ResponseAt = DateTime.Now;
+                notiLog.IsSuccess = true;
+                notiLog.ResponseMessage = message.Body;
+
+                _unitOfWork.NotificationLogRepository.Update(notiLog);
+                await _unitOfWork.SaveChangesAsync(cs);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Send Single SMS Error: {ex.ToString()}");
+            }
+        }
+    }
+}
