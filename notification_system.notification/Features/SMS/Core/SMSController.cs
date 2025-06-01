@@ -23,6 +23,7 @@ namespace notification_system.notification.Features.SMS.Core
         }
 
         [HttpPost("SendMultipleSMS")]
+        [Obsolete]
         public async Task<IActionResult> SendMultipleSMS(SendMultipleSMSRequest request, CancellationToken cs)
         {
             var result = await _bL_SendSMS.SendMultipleSMSAsync(request, cs);
