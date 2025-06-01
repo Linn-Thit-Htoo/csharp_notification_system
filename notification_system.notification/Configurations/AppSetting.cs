@@ -8,6 +8,7 @@
         public Otpconfig OtpConfig { get; set; }
         public Rabbitmq RabbitMQ { get; set; }
         public Consul Consul { get; set; }
+        public Twilio Twilio { get; set; }
     }
 
     public class Connectionstrings
@@ -61,5 +62,11 @@
         public int Port { get; set; }
         public string DiscoveryAddress { get; set; }
         public string HealthCheckEndPoint { get; set; }
+    }
+
+    public class Twilio
+    {
+        public string AccountSid { get; set; }
+        public string AuthToken { get; set; }
     }
 }
