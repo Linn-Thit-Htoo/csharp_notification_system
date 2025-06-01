@@ -30,14 +30,33 @@ namespace notification_system.notification.Services.SMSServices
             try
             {
                 TwilioClient.Init(_setting.Twilio.AccountSid, _setting.Twilio.AuthToken);
+
+                var notiLog = new TblNotificationLog()
+                {
+                    LogId = Ulid.NewUlid().ToString(),
+                    ToPhoneList = request.ToPhoneNumbers.ToJson(),
+                    Payload = request.Messasge,
+                    CreatedAt = DateTime.Now,
+                    LogType = NotificationTypeConstant.SMS
+                };
+
+                await _unitOfWork.NotificationLogRepository.AddAsync(notiLog, cs);
+                await _unitOfWork.SaveChangesAsync(cs);
+
                 foreach (var item in request.ToPhoneNumbers)
                 {
                     var message = await MessageResource.CreateAsync(
-                        body: "This is a bulk message from Twilio!",
-                        from: new Twilio.Types.PhoneNumber(_setting.Twilio.FromPhoneNumber),
-                        to: new Twilio.Types.PhoneNumber(item)
+                        body: request.Messasge,
+                        from: new PhoneNumber(_setting.Twilio.FromPhoneNumber),
+                        to: new PhoneNumber(item)
                     );
                 }
+
+                notiLog.ResponseAt = DateTime.Now;
+                notiLog.IsSuccess = true;
+
+                _unitOfWork.NotificationLogRepository.Update(notiLog);
+                await _unitOfWork.SaveChangesAsync(cs);
             }
             catch (Exception ex)
             {
