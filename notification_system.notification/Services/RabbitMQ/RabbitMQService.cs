@@ -4,9 +4,11 @@ using notification_system.notification.Configurations;
 using notification_system.notification.Extensions;
 using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Features.PushNoti;
+using notification_system.notification.Features.SMS.SendSMS;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
 using notification_system.notification.Services.PushNoti;
+using notification_system.notification.Services.SMSServices;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -48,6 +50,7 @@ namespace notification_system.notification.Services.RabbitMQ
                         var unitOfWork = serviceProvider.GetRequiredService<IUnitOfWork>();
                         var emailService = serviceProvider.GetRequiredService<IEmailService>();
                         var pushNotiService = serviceProvider.GetRequiredService<IPushNotiService>();
+                        var smsService = serviceProvider.GetRequiredService<ITwilioService>();
 
                         if (item.RoutingKey.Equals("single_email_direct"))
                         {
@@ -65,6 +68,18 @@ namespace notification_system.notification.Services.RabbitMQ
                         {
                             var requestModel = content.ToObject<PushNotiRequest>();
                             await pushNotiService.PushNotiAsync(requestModel);
+                        }
+
+                        if (item.RoutingKey.Equals("single_sms_direct"))
+                        {
+                            var requestModel = content.ToObject<SendSingleSMSRequest>();
+                            await smsService.SendSingleSMSAsync(requestModel);
+                        }
+
+                        if (item.RoutingKey.Equals("multiple_sms_direct"))
+                        {
+                            var requestModel = content.ToObject<SendMultipleSMSRequest>();
+                            await smsService.SendMultipleSMSAsync(requestModel);
                         }
 
                         channel.BasicAck(ea.DeliveryTag, false);
