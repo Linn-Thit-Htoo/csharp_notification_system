@@ -26,7 +26,10 @@ namespace notification_system.notification.Extensions;
 
 public static class DependencyInjectionExtensions
 {
-    public static IServiceCollection AddPersistence(this IServiceCollection services, WebApplicationBuilder builder)
+    public static IServiceCollection AddPersistence(
+        this IServiceCollection services,
+        WebApplicationBuilder builder
+    )
     {
         builder
             .Configuration.SetBasePath(builder.Environment.ContentRootPath)
@@ -60,12 +63,14 @@ public static class DependencyInjectionExtensions
                 opt.JsonSerializerOptions.DictionaryKeyPolicy = null;
             });
 
-        builder.Services.AddDbContext<NotificationDbContext>((sp, opt) =>
-        {
-            var setting = sp.GetRequiredService<IOptions<AppSetting>>().Value;
-            opt.UseSqlServer(setting.ConnectionStrings.NotiConnection);
-            opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-        });
+        builder.Services.AddDbContext<NotificationDbContext>(
+            (sp, opt) =>
+            {
+                var setting = sp.GetRequiredService<IOptions<AppSetting>>().Value;
+                opt.UseSqlServer(setting.ConnectionStrings.NotiConnection);
+                opt.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            }
+        );
 
         builder.Services.AddCors(options =>
         {
@@ -80,10 +85,17 @@ public static class DependencyInjectionExtensions
             );
         });
 
-        FirebaseApp.Create(new AppOptions()
-        {
-            Credential = GoogleCredential.FromFile(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "notification-system-b95f7-firebase-adminsdk-fbsvc-e613046e55.json")),
-        });
+        FirebaseApp.Create(
+            new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile(
+                    Path.Combine(
+                        AppDomain.CurrentDomain.BaseDirectory,
+                        "notification-system-b95f7-firebase-adminsdk-fbsvc-e613046e55.json"
+                    )
+                ),
+            }
+        );
 
         builder.Host.UseSerilog(
             (context, config) =>
@@ -135,7 +147,10 @@ public static class DependencyInjectionExtensions
         return services;
     }
 
-    private static IServiceCollection AddConsul(this IServiceCollection services, WebApplicationBuilder builder)
+    private static IServiceCollection AddConsul(
+        this IServiceCollection services,
+        WebApplicationBuilder builder
+    )
     {
         var consulClient = new ConsulClient(config =>
         {
