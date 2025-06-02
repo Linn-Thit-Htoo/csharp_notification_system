@@ -1,5 +1,4 @@
 ﻿using Consul;
-using Microsoft.Extensions.Options;
 using notification_system.gateway.Configurations;
 using notification_system.gateway.Services.ServiceDiscovery;
 using Ocelot.DependencyInjection;
