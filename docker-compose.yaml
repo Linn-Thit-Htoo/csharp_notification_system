@@ -114,7 +114,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "portainer_data:/data"
     networks:
-      - services_infra
+      - notification_system
     deploy:
       replicas: 1
       restart_policy:
