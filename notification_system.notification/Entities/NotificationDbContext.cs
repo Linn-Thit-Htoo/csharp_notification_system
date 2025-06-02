@@ -5,9 +5,7 @@ namespace notification_system.notification.Entities;
 public partial class NotificationDbContext : DbContext
 {
     public NotificationDbContext(DbContextOptions<NotificationDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public virtual DbSet<TblEmailTemplate> TblEmailTemplates { get; set; }
 
@@ -25,10 +23,9 @@ public partial class NotificationDbContext : DbContext
 
             entity.Property(e => e.Id).HasMaxLength(50);
             entity.Property(e => e.BccEmailList).HasColumnName("BCcEmailList");
-            entity.Property(e => e.ContentType)
-                .HasMaxLength(10)
-                .HasComment("Rich Text, HTML");
-            entity.Property(e => e.CreatedAt)
+            entity.Property(e => e.ContentType).HasMaxLength(10).HasComment("Rich Text, HTML");
+            entity
+                .Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.DeletedAt).HasColumnType("datetime");
@@ -45,7 +42,8 @@ public partial class NotificationDbContext : DbContext
 
             entity.Property(e => e.LogId).HasMaxLength(50);
             entity.Property(e => e.BccEmailList).HasColumnName("BCcEmailList");
-            entity.Property(e => e.CreatedAt)
+            entity
+                .Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.LogType).HasMaxLength(10);
@@ -59,7 +57,8 @@ public partial class NotificationDbContext : DbContext
             entity.ToTable("Tbl_Otp");
 
             entity.Property(e => e.OtpId).HasMaxLength(50);
-            entity.Property(e => e.CreatedAt)
+            entity
+                .Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.Email).HasMaxLength(50);
@@ -70,11 +69,10 @@ public partial class NotificationDbContext : DbContext
         {
             entity.ToTable("Tbl_SMS_Templates");
 
-            entity.Property(e => e.Id)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.Property(e => e.Id).HasMaxLength(10).IsFixedLength();
             entity.Property(e => e.BodyContent).HasMaxLength(300);
-            entity.Property(e => e.CreatedAt)
+            entity
+                .Property(e => e.CreatedAt)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
             entity.Property(e => e.DeletedAt).HasColumnType("datetime");
