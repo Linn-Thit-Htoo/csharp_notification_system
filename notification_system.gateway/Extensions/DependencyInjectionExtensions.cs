@@ -9,7 +9,10 @@ namespace notification_system.gateway.Extensions;
 
 public static class DependencyInjectionExtensions
 {
-    public static IServiceCollection AddPersistence(this IServiceCollection services, WebApplicationBuilder builder)
+    public static IServiceCollection AddPersistence(
+        this IServiceCollection services,
+        WebApplicationBuilder builder
+    )
     {
         builder
             .Configuration.SetBasePath(builder.Environment.ContentRootPath)
@@ -19,16 +22,18 @@ public static class DependencyInjectionExtensions
                 reloadOnChange: true
             )
             .AddJsonFile(
-            $"ocelot.{builder.Environment.EnvironmentName}.json",
-            optional: false,
-            reloadOnChange: true
+                $"ocelot.{builder.Environment.EnvironmentName}.json",
+                optional: false,
+                reloadOnChange: true
             )
             .AddEnvironmentVariables();
 
-        builder.Services.AddControllers().AddJsonOptions(opt =>
-        {
-            opt.JsonSerializerOptions.PropertyNamingPolicy = null;
-        });
+        builder
+            .Services.AddControllers()
+            .AddJsonOptions(opt =>
+            {
+                opt.JsonSerializerOptions.PropertyNamingPolicy = null;
+            });
 
         if (!builder.Environment.IsDevelopment())
         {
@@ -39,9 +44,7 @@ public static class DependencyInjectionExtensions
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder
-            .Services.AddOcelot()
-            .AddConsul();
+        builder.Services.AddOcelot().AddConsul();
         builder.Services.AddHealthChecks();
         builder.Services.AddHttpContextAccessor();
         builder.Services.Configure<AppSetting>(builder.Configuration);
@@ -49,7 +52,10 @@ public static class DependencyInjectionExtensions
         return services;
     }
 
-    private static IServiceCollection AddConsul(this IServiceCollection services, WebApplicationBuilder builder)
+    private static IServiceCollection AddConsul(
+        this IServiceCollection services,
+        WebApplicationBuilder builder
+    )
     {
         var consulClient = new ConsulClient(config =>
         {
