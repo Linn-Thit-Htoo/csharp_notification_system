@@ -2,67 +2,66 @@
 using notification_system.notification.Services.EmailServices;
 using notification_system.notification.Utils;
 
-namespace notification_system.notification.Features.Email.SendEmail
+namespace notification_system.notification.Features.Email.SendEmail;
+
+public class BL_SendEmail
 {
-    public class BL_SendEmail
+    private readonly IEmailService _emailService;
+    private readonly IValidator<SendEmailRequest> _sendSingleEmailValidator;
+    private readonly IValidator<SendEmailMultipleRequest> _sendMultipleEmailValidator;
+
+    public BL_SendEmail(IEmailService emailService, IValidator<SendEmailRequest> sendSingleEmailValidator, IValidator<SendEmailMultipleRequest> sendMultipleEmailValidator)
     {
-        private readonly IEmailService _emailService;
-        private readonly IValidator<SendEmailRequest> _sendSingleEmailValidator;
-        private readonly IValidator<SendEmailMultipleRequest> _sendMultipleEmailValidator;
+        _emailService = emailService;
+        _sendSingleEmailValidator = sendSingleEmailValidator;
+        _sendMultipleEmailValidator = sendMultipleEmailValidator;
+    }
 
-        public BL_SendEmail(IEmailService emailService, IValidator<SendEmailRequest> sendSingleEmailValidator, IValidator<SendEmailMultipleRequest> sendMultipleEmailValidator)
+    public async Task<BaseResponse<SendEmailResponse>> SendSingleEmailAsync(SendEmailRequest request, CancellationToken cs = default)
+    {
+        BaseResponse<SendEmailResponse> result;
+        try
         {
-            _emailService = emailService;
-            _sendSingleEmailValidator = sendSingleEmailValidator;
-            _sendMultipleEmailValidator = sendMultipleEmailValidator;
+            var validationResult = await _sendSingleEmailValidator.ValidateAsync(request, cs);
+            if (!validationResult.IsValid)
+            {
+                result = BaseResponse<SendEmailResponse>.Fail(string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage)));
+                goto result;
+            }
+
+            await _emailService.SendEmailAsync(request, cs);
+            result = BaseResponse<SendEmailResponse>.Success();
+        }
+        catch (Exception ex)
+        {
+            result = BaseResponse<SendEmailResponse>.Fail(ex);
         }
 
-        public async Task<BaseResponse<SendEmailResponse>> SendSingleEmailAsync(SendEmailRequest request, CancellationToken cs = default)
+    result:
+        return result;
+    }
+
+    public async Task<BaseResponse<SendEmailResponse>> SendMultipleEmailAsync(SendEmailMultipleRequest request, CancellationToken cs = default)
+    {
+        BaseResponse<SendEmailResponse> result;
+        try
         {
-            BaseResponse<SendEmailResponse> result;
-            try
+            var validationResult = await _sendMultipleEmailValidator.ValidateAsync(request, cs);
+            if (!validationResult.IsValid)
             {
-                var validationResult = await _sendSingleEmailValidator.ValidateAsync(request, cs);
-                if (!validationResult.IsValid)
-                {
-                    result = BaseResponse<SendEmailResponse>.Fail(string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage)));
-                    goto result;
-                }
-
-                await _emailService.SendEmailAsync(request, cs);
-                result = BaseResponse<SendEmailResponse>.Success();
-            }
-            catch (Exception ex)
-            {
-                result = BaseResponse<SendEmailResponse>.Fail(ex);
+                result = BaseResponse<SendEmailResponse>.Fail(string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage)));
+                goto result;
             }
 
-        result:
-            return result;
+            await _emailService.SendMultipleEmailAysnc(request, cs);
+            result = BaseResponse<SendEmailResponse>.Success();
+        }
+        catch (Exception ex)
+        {
+            result = BaseResponse<SendEmailResponse>.Fail(ex);
         }
 
-        public async Task<BaseResponse<SendEmailResponse>> SendMultipleEmailAsync(SendEmailMultipleRequest request, CancellationToken cs = default)
-        {
-            BaseResponse<SendEmailResponse> result;
-            try
-            {
-                var validationResult = await _sendMultipleEmailValidator.ValidateAsync(request, cs);
-                if (!validationResult.IsValid)
-                {
-                    result = BaseResponse<SendEmailResponse>.Fail(string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage)));
-                    goto result;
-                }
-
-                await _emailService.SendMultipleEmailAysnc(request, cs);
-                result = BaseResponse<SendEmailResponse>.Success();
-            }
-            catch (Exception ex)
-            {
-                result = BaseResponse<SendEmailResponse>.Fail(ex);
-            }
-
-        result:
-            return result;
-        }
+    result:
+        return result;
     }
 }
