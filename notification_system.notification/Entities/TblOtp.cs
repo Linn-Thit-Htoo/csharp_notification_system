@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace notification_system.notification.Entities;
 
 public partial class TblOtp
