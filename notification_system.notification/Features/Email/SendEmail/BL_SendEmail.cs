@@ -46,7 +46,7 @@ public class BL_SendEmail
             result = BaseResponse<SendEmailResponse>.Fail(ex);
         }
 
-        result:
+    result:
         return result;
     }
 
@@ -75,7 +75,7 @@ public class BL_SendEmail
             result = BaseResponse<SendEmailResponse>.Fail(ex);
         }
 
-        result:
+    result:
         return result;
     }
 }
