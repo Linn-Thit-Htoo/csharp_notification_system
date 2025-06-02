@@ -1,6 +1,5 @@
-﻿namespace notification_system.notification.Features.Email.SendEmail
+﻿namespace notification_system.notification.Features.Email.SendEmail;
+
+public class SendEmailResponse
 {
-    public class SendEmailResponse
-    {
-    }
 }
