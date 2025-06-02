@@ -22,7 +22,10 @@ public class EmailController : BaseController
     }
 
     [HttpPost(("SendMultipleEmail"))]
-    public async Task<IActionResult> SendMultipleEmail(SendEmailMultipleRequest request, CancellationToken cs)
+    public async Task<IActionResult> SendMultipleEmail(
+        SendEmailMultipleRequest request,
+        CancellationToken cs
+    )
     {
         var result = await _bL_SendEmail.SendMultipleEmailAsync(request, cs);
         return Content(result);
