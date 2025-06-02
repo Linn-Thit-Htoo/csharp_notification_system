@@ -1,9 +1,8 @@
-﻿namespace notification_system.notification.Constants
+﻿namespace notification_system.notification.Constants;
+
+public class NotificationTypeConstant
 {
-    public class NotificationTypeConstant
-    {
-        public const string Email = "Email";
-        public const string SMS = "SMS";
-        public const string PushNoti = "PushNoti";
-    }
+    public const string Email = "Email";
+    public const string SMS = "SMS";
+    public const string PushNoti = "PushNoti";
 }
