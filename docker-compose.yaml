@@ -105,6 +105,20 @@ services:
       - seq-data:/data
     networks:
       - notification_system
+ 
+  portainer:
+    image: portainer/portainer-ce
+    ports:
+      - "9000:9000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "portainer_data:/data"
+    networks:
+      - services_infra
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
 
 networks:
   notification_system:
@@ -113,3 +127,4 @@ networks:
 volumes:
   seq-data:
   sqlserverdata:
+  portainer_data:
