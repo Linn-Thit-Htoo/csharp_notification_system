@@ -1,6 +1,6 @@
-﻿using notification_system.notification.Models;
+﻿using System.Security.Claims;
+using notification_system.notification.Models;
 using Serilog;
-using System.Security.Claims;
 
 namespace notification_system.notification.Utils;
 
