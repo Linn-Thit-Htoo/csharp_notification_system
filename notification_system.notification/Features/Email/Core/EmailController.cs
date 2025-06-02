@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using notification_system.notification.Features.Email.SendEmail;
 
 namespace notification_system.notification.Features.Email.Core
