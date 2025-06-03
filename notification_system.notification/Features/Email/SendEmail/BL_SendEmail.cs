@@ -8,12 +8,12 @@ public class BL_SendEmail
 {
     private readonly IEmailService _emailService;
     private readonly IValidator<SendEmailRequest> _sendSingleEmailValidator;
-    private readonly IValidator<SendEmailMultipleRequest> _sendMultipleEmailValidator;
+    private readonly IValidator<SendMultipleEmailRequest> _sendMultipleEmailValidator;
 
     public BL_SendEmail(
         IEmailService emailService,
         IValidator<SendEmailRequest> sendSingleEmailValidator,
-        IValidator<SendEmailMultipleRequest> sendMultipleEmailValidator
+        IValidator<SendMultipleEmailRequest> sendMultipleEmailValidator
     )
     {
         _emailService = emailService;
@@ -51,7 +51,7 @@ public class BL_SendEmail
     }
 
     public async Task<BaseResponse<SendEmailResponse>> SendMultipleEmailAsync(
-        SendEmailMultipleRequest request,
+        SendMultipleEmailRequest request,
         CancellationToken cs = default
     )
     {

@@ -60,7 +60,7 @@ namespace notification_system.notification.Services.RabbitMQ
 
                         if (item.RoutingKey.Equals("multiple_email_direct"))
                         {
-                            var requestModel = content.ToObject<SendEmailMultipleRequest>();
+                            var requestModel = content.ToObject<SendMultipleEmailRequest>();
                             await emailService.SendMultipleEmailAysnc(requestModel);
                         }
 

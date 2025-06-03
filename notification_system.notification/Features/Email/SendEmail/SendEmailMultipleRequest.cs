@@ -2,7 +2,7 @@
 
 namespace notification_system.notification.Features.Email.SendEmail;
 
-public class SendEmailMultipleRequest
+public class SendMultipleEmailRequest
 {
     public string Subject { get; set; }
     public string HtmlContent { get; set; }

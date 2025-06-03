@@ -91,7 +91,7 @@ namespace notification_system.notification.Services.EmailServices
             }
         }
 
-        public async Task SendMultipleEmailAysnc(SendEmailMultipleRequest request, CancellationToken cs = default)
+        public async Task SendMultipleEmailAysnc(SendMultipleEmailRequest request, CancellationToken cs = default)
         {
             try
             {

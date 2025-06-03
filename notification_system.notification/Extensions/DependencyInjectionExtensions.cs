@@ -15,6 +15,7 @@ using notification_system.notification.Features.PushNoti;
 using notification_system.notification.Features.SMS.SendSMS;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Services.EmailServices;
+using notification_system.notification.Services.Kafka;
 using notification_system.notification.Services.PushNoti;
 using notification_system.notification.Services.RabbitMQ;
 using notification_system.notification.Services.ServiceDiscovery;
@@ -143,6 +144,10 @@ public static class DependencyInjectionExtensions
         builder.Services.AddHostedService<RabbitMQService>();
         builder.Services.AddScoped<IPushNotiService, PushNotiService>();
         builder.Services.AddScoped<ITwilioService, TwilioService>();
+        builder.Services.AddSingleton<SingleSMSConsumerService>();
+        builder.Services.AddSingleton<MultipleSMSConsumerService>();
+        builder.Services.AddSingleton<SingleEmailConsumerService>();
+        builder.Services.AddSingleton<MultipleEmailConsumerService>();
 
         return services;
     }

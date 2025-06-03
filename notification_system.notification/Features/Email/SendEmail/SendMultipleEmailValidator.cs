@@ -2,7 +2,7 @@
 
 namespace notification_system.notification.Features.Email.SendEmail;
 
-public class SendMultipleEmailValidator : AbstractValidator<SendEmailMultipleRequest>
+public class SendMultipleEmailValidator : AbstractValidator<SendMultipleEmailRequest>
 {
     public SendMultipleEmailValidator()
     {

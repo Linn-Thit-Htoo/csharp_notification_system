@@ -23,7 +23,7 @@ public class EmailController : BaseController
 
     [HttpPost(("SendMultipleEmail"))]
     public async Task<IActionResult> SendMultipleEmail(
-        SendEmailMultipleRequest request,
+        SendMultipleEmailRequest request,
         CancellationToken cs
     )
     {
