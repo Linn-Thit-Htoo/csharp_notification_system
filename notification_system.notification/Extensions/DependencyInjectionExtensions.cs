@@ -144,10 +144,10 @@ public static class DependencyInjectionExtensions
         builder.Services.AddHostedService<RabbitMQService>();
         builder.Services.AddScoped<IPushNotiService, PushNotiService>();
         builder.Services.AddScoped<ITwilioService, TwilioService>();
-        builder.Services.AddSingleton<SingleSMSConsumerService>();
-        builder.Services.AddSingleton<MultipleSMSConsumerService>();
-        builder.Services.AddSingleton<SingleEmailConsumerService>();
-        builder.Services.AddSingleton<MultipleEmailConsumerService>();
+        builder.Services.AddHostedService<SingleEmailConsumerService>();
+        builder.Services.AddHostedService<MultipleEmailConsumerService>();
+        builder.Services.AddHostedService<SingleSMSConsumerService>();
+        builder.Services.AddHostedService<MultipleSMSConsumerService>();
 
         return services;
     }

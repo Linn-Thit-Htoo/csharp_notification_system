@@ -6,6 +6,7 @@ using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Features.SMS.SendSMS;
 using notification_system.notification.Services.EmailServices;
 using notification_system.notification.Services.SMSServices;
+using static notification_system.notification.Extensions.Extension;
 
 namespace notification_system.notification.Services.Kafka
 {
@@ -24,7 +25,7 @@ namespace notification_system.notification.Services.Kafka
             var consumerConfig = new ConsumerConfig
             {
                 BootstrapServers = _appSetting.Kafka.BootstrapServers,
-                GroupId = _appSetting.Kafka.Email.SingleEmail.GroupId,
+                GroupId = _appSetting.Kafka.SMS.SingleSMS.GroupId,
                 AutoOffsetReset = AutoOffsetReset.Earliest
             };
 
@@ -34,7 +35,8 @@ namespace notification_system.notification.Services.Kafka
 
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _consumer.Subscribe(_appSetting.Kafka.Email.SingleEmail.Topic);
+            //await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.Email.SingleEmail.Topic);
+            _consumer.Subscribe(_appSetting.Kafka.SMS.SingleSMS.Topic);
 
             while (!stoppingToken.IsCancellationRequested)
             {

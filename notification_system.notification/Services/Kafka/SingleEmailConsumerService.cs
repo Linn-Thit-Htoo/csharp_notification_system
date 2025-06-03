@@ -4,6 +4,7 @@ using notification_system.notification.Configurations;
 using notification_system.notification.Extensions;
 using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Services.EmailServices;
+using static notification_system.notification.Extensions.Extension;
 
 namespace notification_system.notification.Services.Kafka
 {
@@ -32,6 +33,7 @@ namespace notification_system.notification.Services.Kafka
 
         protected async override Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            //await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.Email.SingleEmail.Topic);
             _consumer.Subscribe(_appSetting.Kafka.Email.SingleEmail.Topic);
 
             while (!stoppingToken.IsCancellationRequested)
