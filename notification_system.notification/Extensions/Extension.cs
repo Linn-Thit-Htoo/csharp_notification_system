@@ -16,7 +16,9 @@ public static class Extension
 
     public static async Task EnsureTopicExistsAsync(string bootstrapServers, string topicName)
     {
-        using var adminClient = new AdminClientBuilder(new AdminClientConfig { BootstrapServers = bootstrapServers }).Build();
+        using var adminClient = new AdminClientBuilder(
+            new AdminClientConfig { BootstrapServers = bootstrapServers }
+        ).Build();
 
         try
         {
@@ -24,17 +26,20 @@ public static class Extension
             if (metadata.Topics.Any(t => t.Topic == topicName))
                 return;
 
-            await adminClient.CreateTopicsAsync(new TopicSpecification[]
-            {
-                new TopicSpecification
+            await adminClient.CreateTopicsAsync(
+                new TopicSpecification[]
                 {
-                    Name = topicName,
-                    NumPartitions = 1,
-                    ReplicationFactor = 1
+                    new TopicSpecification
+                    {
+                        Name = topicName,
+                        NumPartitions = 1,
+                        ReplicationFactor = 1,
+                    },
                 }
-            });
+            );
         }
-        catch (CreateTopicsException e) when (e.Results.Any(r => r.Error.Code == ErrorCode.TopicAlreadyExists))
+        catch (CreateTopicsException e)
+            when (e.Results.Any(r => r.Error.Code == ErrorCode.TopicAlreadyExists))
         {
             // Topic already exists, ignore
         }
