@@ -33,7 +33,7 @@ public class MultipleEmailConsumerService : BackgroundService
 
     protected async override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        //await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.Email.SingleEmail.Topic);
+        await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.Email.MultipleEmail.Topic);
         _consumer.Subscribe(_appSetting.Kafka.Email.MultipleEmail.Topic);
 
         while (!stoppingToken.IsCancellationRequested)

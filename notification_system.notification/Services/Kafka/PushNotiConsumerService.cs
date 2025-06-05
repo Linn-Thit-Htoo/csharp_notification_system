@@ -36,7 +36,7 @@ namespace notification_system.notification.Services.Kafka
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            //await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.Email.SingleEmail.Topic);
+            await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.PushNotification.Topic);
             _consumer.Subscribe(_appSetting.Kafka.PushNotification.Topic);
 
             while (!stoppingToken.IsCancellationRequested)
