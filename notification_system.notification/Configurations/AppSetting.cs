@@ -60,6 +60,7 @@ public class Kafka
     public string BootstrapServers { get; set; }
     public Email Email { get; set; }
     public SMS SMS { get; set; }
+    public Pushnotification PushNotification { get; set; }
 }
 
 public class Email
@@ -93,6 +94,12 @@ public class Singlesms
 }
 
 public class Multiplesms
+{
+    public string Topic { get; set; }
+    public string GroupId { get; set; }
+}
+
+public class Pushnotification
 {
     public string Topic { get; set; }
     public string GroupId { get; set; }

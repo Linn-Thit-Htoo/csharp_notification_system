@@ -148,6 +148,7 @@ public static class DependencyInjectionExtensions
         builder.Services.AddHostedService<MultipleEmailConsumerService>();
         builder.Services.AddHostedService<SingleSMSConsumerService>();
         builder.Services.AddHostedService<MultipleSMSConsumerService>();
+        builder.Services.AddHostedService<PushNotiConsumerService>();
 
         return services;
     }
