@@ -13,7 +13,10 @@ public class BL_SendSMS
         _twilioService = twilioService;
     }
 
-    public async Task<BaseResponse<SendSMSResponse>> SendSingleSMSAsync(SendSingleSMSRequest request, CancellationToken cs = default)
+    public async Task<BaseResponse<SendSMSResponse>> SendSingleSMSAsync(
+        SendSingleSMSRequest request,
+        CancellationToken cs = default
+    )
     {
         BaseResponse<SendSMSResponse> result;
 
@@ -32,11 +35,14 @@ public class BL_SendSMS
         await _twilioService.SendSingleSMSAsync(request, cs);
         result = BaseResponse<SendSMSResponse>.Success();
 
-    result:
+        result:
         return result;
     }
 
-    public async Task<BaseResponse<SendSMSResponse>> SendMultipleSMSAsync(SendMultipleSMSRequest request, CancellationToken cs = default)
+    public async Task<BaseResponse<SendSMSResponse>> SendMultipleSMSAsync(
+        SendMultipleSMSRequest request,
+        CancellationToken cs = default
+    )
     {
         BaseResponse<SendSMSResponse> result;
 
@@ -55,7 +61,7 @@ public class BL_SendSMS
         await _twilioService.SendMultipleSMSAsync(request, cs);
         result = BaseResponse<SendSMSResponse>.Success();
 
-    result:
+        result:
         return result;
     }
 }
