@@ -44,12 +44,10 @@ public class DA_RequestOtp
 
     private int GenerateSixDigitNumber()
     {
-        using (var rng = RandomNumberGenerator.Create())
-        {
-            byte[] bytes = new byte[4];
-            rng.GetBytes(bytes);
-            int randomValue = BitConverter.ToInt32(bytes, 0) & int.MaxValue;
-            return (randomValue % 900000) + 100000;
-        }
+        using var rng = RandomNumberGenerator.Create();
+        byte[] bytes = new byte[4];
+        rng.GetBytes(bytes);
+        int randomValue = BitConverter.ToInt32(bytes, 0) & int.MaxValue;
+        return (randomValue % 900000) + 100000;
     }
 }
