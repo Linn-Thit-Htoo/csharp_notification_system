@@ -54,11 +54,7 @@ public partial class MigrateToNewVolume : Migration
             name: "Tbl_Notification_Logs",
             columns: table => new
             {
-                LogId = table.Column<string>(
-                    type: "nvarchar(50)",
-                    maxLength: 50,
-                    nullable: false
-                ),
+                LogId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                 LogType = table.Column<string>(
                     type: "nvarchar(10)",
                     maxLength: 10,
@@ -88,17 +84,9 @@ public partial class MigrateToNewVolume : Migration
             name: "Tbl_Otp",
             columns: table => new
             {
-                OtpId = table.Column<string>(
-                    type: "nvarchar(50)",
-                    maxLength: 50,
-                    nullable: false
-                ),
+                OtpId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                 OtpValue = table.Column<int>(type: "int", nullable: false),
-                Email = table.Column<string>(
-                    type: "nvarchar(50)",
-                    maxLength: 50,
-                    nullable: false
-                ),
+                Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                 CreatedAt = table.Column<DateTime>(
                     type: "datetime",
                     nullable: false,
