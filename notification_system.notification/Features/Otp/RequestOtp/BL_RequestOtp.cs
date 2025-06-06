@@ -32,7 +32,7 @@ public class BL_RequestOtp
 
         result = await _dA_RequestOtp.RequestOtp(request, cs);
 
-        result:
+    result:
         return result;
     }
 }
