@@ -1,6 +1,5 @@
-﻿namespace notification_system.notification.Features.PushNoti
+﻿namespace notification_system.notification.Features.PushNoti;
+
+public class PushNotiResponse
 {
-    public class PushNotiResponse
-    {
-    }
 }
