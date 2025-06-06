@@ -15,20 +15,25 @@ public class BL_PushNoti
         _validator = validator;
     }
 
-    public async Task<BaseResponse<PushNotiResponse>> PushNotiAsync(PushNotiRequest request, CancellationToken cs = default)
+    public async Task<BaseResponse<PushNotiResponse>> PushNotiAsync(
+        PushNotiRequest request,
+        CancellationToken cs = default
+    )
     {
         BaseResponse<PushNotiResponse> result;
 
         var validationResult = await _validator.ValidateAsync(request, cs);
         if (!validationResult.IsValid)
         {
-            result = BaseResponse<PushNotiResponse>.Fail(string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage)));
+            result = BaseResponse<PushNotiResponse>.Fail(
+                string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage))
+            );
             goto result;
         }
 
         result = await _pushNotiService.PushNotiAsync(request, cs);
 
-    result:
+        result:
         return result;
     }
 }
