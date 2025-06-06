@@ -13,12 +13,20 @@ public class DA_VerifyOtp
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<BaseResponse<VerifyOtpResponse>> VerifyOtpAsync(VerifyOtpRequest request, CancellationToken cs = default)
+    public async Task<BaseResponse<VerifyOtpResponse>> VerifyOtpAsync(
+        VerifyOtpRequest request,
+        CancellationToken cs = default
+    )
     {
         BaseResponse<VerifyOtpResponse> result;
 
-        var item = await _unitOfWork.OtpRepository
-            .GetByCondition(x => x.OtpId == request.RefId && x.OtpValue == request.OtpValue && x.ExpiredAt > DateTime.Now && !x.IsDeleted)
+        var item = await _unitOfWork
+            .OtpRepository.GetByCondition(x =>
+                x.OtpId == request.RefId
+                && x.OtpValue == request.OtpValue
+                && x.ExpiredAt > DateTime.Now
+                && !x.IsDeleted
+            )
             .SingleOrDefaultAsync(cs);
         if (item is null)
         {
@@ -32,7 +40,7 @@ public class DA_VerifyOtp
 
         result = BaseResponse<VerifyOtpResponse>.Success();
 
-    result:
+        result:
         return result;
     }
 }
