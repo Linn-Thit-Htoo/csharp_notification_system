@@ -15,7 +15,10 @@ public class SMSController : BaseController
     }
 
     [HttpPost("SendSingleSMS")]
-    public async Task<IActionResult> SendSingleSMS(SendSingleSMSRequest request, CancellationToken cs)
+    public async Task<IActionResult> SendSingleSMS(
+        SendSingleSMSRequest request,
+        CancellationToken cs
+    )
     {
         var result = await _bL_SendSMS.SendSingleSMSAsync(request, cs);
         return Content(result);
@@ -23,7 +26,10 @@ public class SMSController : BaseController
 
     [HttpPost("SendMultipleSMS")]
     [Obsolete]
-    public async Task<IActionResult> SendMultipleSMS(SendMultipleSMSRequest request, CancellationToken cs)
+    public async Task<IActionResult> SendMultipleSMS(
+        SendMultipleSMSRequest request,
+        CancellationToken cs
+    )
     {
         var result = await _bL_SendSMS.SendMultipleSMSAsync(request, cs);
         return Content(result);
