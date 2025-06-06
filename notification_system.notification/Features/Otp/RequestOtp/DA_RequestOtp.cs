@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Security.Cryptography;
+using Microsoft.Extensions.Options;
 using notification_system.notification.Configurations;
 using notification_system.notification.Entities;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Utils;
-using System.Security.Cryptography;
 
 namespace notification_system.notification.Features.Otp.RequestOtp;
 
@@ -18,7 +18,10 @@ public class DA_RequestOtp
         _setting = setting.Value;
     }
 
-    public async Task<BaseResponse<RequestOtpResponse>> RequestOtp(RequestOtpRequest request, CancellationToken cs = default)
+    public async Task<BaseResponse<RequestOtpResponse>> RequestOtp(
+        RequestOtpRequest request,
+        CancellationToken cs = default
+    )
     {
         int otpValue = GenerateSixDigitNumber();
         var item = new TblOtp()
@@ -28,17 +31,15 @@ public class DA_RequestOtp
             Email = request.Email,
             ExpiredAt = DateTime.Now.AddMinutes(_setting.OtpConfig.ExpireInMinutes),
             IsDeleted = false,
-            OtpValue = otpValue
+            OtpValue = otpValue,
         };
 
         await _unitOfWork.OtpRepository.AddAsync(item, cs);
         await _unitOfWork.SaveChangesAsync(cs);
 
-        return BaseResponse<RequestOtpResponse>.Success(new RequestOtpResponse
-        {
-            ExpiredAt = item.ExpiredAt,
-            Otp = otpValue,
-        });
+        return BaseResponse<RequestOtpResponse>.Success(
+            new RequestOtpResponse { ExpiredAt = item.ExpiredAt, Otp = otpValue }
+        );
     }
 
     private int GenerateSixDigitNumber()
