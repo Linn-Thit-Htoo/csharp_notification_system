@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using notification_system.notification.Features.SMS.SendSMS;
 
 namespace notification_system.notification.Features.SMS.Core;
