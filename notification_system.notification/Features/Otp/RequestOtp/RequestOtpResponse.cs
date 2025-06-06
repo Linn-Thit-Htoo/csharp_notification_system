@@ -1,8 +1,7 @@
-﻿namespace notification_system.notification.Features.Otp.RequestOtp
+﻿namespace notification_system.notification.Features.Otp.RequestOtp;
+
+public class RequestOtpResponse
 {
-    public class RequestOtpResponse
-    {
-        public int Otp { get; set; }
-        public DateTime ExpiredAt { get; set; }
-    }
+    public int Otp { get; set; }
+    public DateTime ExpiredAt { get; set; }
 }
