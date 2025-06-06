@@ -2,34 +2,33 @@
 using notification_system.notification.Services.PushNoti;
 using notification_system.notification.Utils;
 
-namespace notification_system.notification.Features.PushNoti
+namespace notification_system.notification.Features.PushNoti;
+
+public class BL_PushNoti
 {
-    public class BL_PushNoti
+    private readonly IPushNotiService _pushNotiService;
+    private readonly IValidator<PushNotiRequest> _validator;
+
+    public BL_PushNoti(IPushNotiService pushNotiService, IValidator<PushNotiRequest> validator)
     {
-        private readonly IPushNotiService _pushNotiService;
-        private readonly IValidator<PushNotiRequest> _validator;
+        _pushNotiService = pushNotiService;
+        _validator = validator;
+    }
 
-        public BL_PushNoti(IPushNotiService pushNotiService, IValidator<PushNotiRequest> validator)
+    public async Task<BaseResponse<PushNotiResponse>> PushNotiAsync(PushNotiRequest request, CancellationToken cs = default)
+    {
+        BaseResponse<PushNotiResponse> result;
+
+        var validationResult = await _validator.ValidateAsync(request, cs);
+        if (!validationResult.IsValid)
         {
-            _pushNotiService = pushNotiService;
-            _validator = validator;
+            result = BaseResponse<PushNotiResponse>.Fail(string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage)));
+            goto result;
         }
 
-        public async Task<BaseResponse<PushNotiResponse>> PushNotiAsync(PushNotiRequest request, CancellationToken cs = default)
-        {
-            BaseResponse<PushNotiResponse> result;
+        result = await _pushNotiService.PushNotiAsync(request, cs);
 
-            var validationResult = await _validator.ValidateAsync(request, cs);
-            if (!validationResult.IsValid)
-            {
-                result = BaseResponse<PushNotiResponse>.Fail(string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage)));
-                goto result;
-            }
-
-            result = await _pushNotiService.PushNotiAsync(request, cs);
-
-        result:
-            return result;
-        }
+    result:
+        return result;
     }
 }
