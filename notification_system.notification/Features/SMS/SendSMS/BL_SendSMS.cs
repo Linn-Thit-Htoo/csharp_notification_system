@@ -35,7 +35,7 @@ public class BL_SendSMS
         await _twilioService.SendSingleSMSAsync(request, cs);
         result = BaseResponse<SendSMSResponse>.Success();
 
-        result:
+    result:
         return result;
     }
 
@@ -61,7 +61,7 @@ public class BL_SendSMS
         await _twilioService.SendMultipleSMSAsync(request, cs);
         result = BaseResponse<SendSMSResponse>.Success();
 
-        result:
+    result:
         return result;
     }
 }
