@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
-using System.Linq.Expressions;
 
 namespace notification_system.notification.Persistence.Base;
 
-public class RepositoryBase<T> : IRepositoryBase<T> where T : class
+public class RepositoryBase<T> : IRepositoryBase<T>
+    where T : class
 {
     internal readonly DbContext _context;
     internal readonly DbSet<T> _dbSet;
@@ -62,7 +63,11 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : class
         return _dbSet.Where(expression);
     }
 
-    public IQueryable<T> Query(Expression<Func<T, bool>>? expression = null, Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null, Func<IQueryable<T>, IOrderedQueryable<T>>? order = null)
+    public IQueryable<T> Query(
+        Expression<Func<T, bool>>? expression = null,
+        Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+        Func<IQueryable<T>, IOrderedQueryable<T>>? order = null
+    )
     {
         IQueryable<T> query = _dbSet;
 
