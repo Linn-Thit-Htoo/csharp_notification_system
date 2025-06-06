@@ -15,7 +15,11 @@ public class MultipleSMSConsumerService : BackgroundService
     private readonly AppSetting _appSetting;
     private readonly IServiceScopeFactory _serviceScopeFactory;
 
-    public MultipleSMSConsumerService(ILogger<MultipleSMSConsumerService> logger, IOptions<AppSetting> setting, IServiceScopeFactory serviceScopeFactory)
+    public MultipleSMSConsumerService(
+        ILogger<MultipleSMSConsumerService> logger,
+        IOptions<AppSetting> setting,
+        IServiceScopeFactory serviceScopeFactory
+    )
     {
         _logger = logger;
         _appSetting = setting.Value;
@@ -24,16 +28,19 @@ public class MultipleSMSConsumerService : BackgroundService
         {
             BootstrapServers = _appSetting.Kafka.BootstrapServers,
             GroupId = _appSetting.Kafka.SMS.MultipleSMS.GroupId,
-            AutoOffsetReset = AutoOffsetReset.Earliest
+            AutoOffsetReset = AutoOffsetReset.Earliest,
         };
 
         _consumer = new ConsumerBuilder<Ignore, string>(consumerConfig).Build();
         _serviceScopeFactory = serviceScopeFactory;
     }
 
-    protected async override Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.SMS.MultipleSMS.Topic);
+        await Extension.EnsureTopicExistsAsync(
+            _appSetting.Kafka.BootstrapServers,
+            _appSetting.Kafka.SMS.MultipleSMS.Topic
+        );
         _consumer.Subscribe(_appSetting.Kafka.SMS.MultipleSMS.Topic);
 
         while (!stoppingToken.IsCancellationRequested)
