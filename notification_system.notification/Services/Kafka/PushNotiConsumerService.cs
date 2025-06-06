@@ -1,5 +1,4 @@
 ﻿using Confluent.Kafka;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using notification_system.notification.Configurations;
 using notification_system.notification.Extensions;
