@@ -40,7 +40,7 @@ public class DA_VerifyOtp
 
         result = BaseResponse<VerifyOtpResponse>.Success();
 
-        result:
+    result:
         return result;
     }
 }
