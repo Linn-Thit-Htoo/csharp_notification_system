@@ -14,20 +14,25 @@ public class BL_VerifyOtp
         _validator = validator;
     }
 
-    public async Task<BaseResponse<VerifyOtpResponse>> VerifyOtpAsync(VerifyOtpRequest request, CancellationToken cs = default)
+    public async Task<BaseResponse<VerifyOtpResponse>> VerifyOtpAsync(
+        VerifyOtpRequest request,
+        CancellationToken cs = default
+    )
     {
         BaseResponse<VerifyOtpResponse> result;
 
         var validationResult = await _validator.ValidateAsync(request, cs);
         if (!validationResult.IsValid)
         {
-            result = BaseResponse<VerifyOtpResponse>.Fail(string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage)));
+            result = BaseResponse<VerifyOtpResponse>.Fail(
+                string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage))
+            );
             goto result;
         }
 
         result = await _dA_VerifyOtp.VerifyOtpAsync(request, cs);
 
-    result:
+        result:
         return result;
     }
 }
