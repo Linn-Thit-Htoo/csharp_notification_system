@@ -14,7 +14,11 @@ public class PushNotiConsumerService : BackgroundService
     private readonly AppSetting _appSetting;
     private readonly IServiceScopeFactory _serviceScopeFactory;
 
-    public PushNotiConsumerService(ILogger<MultipleSMSConsumerService> logger, IOptions<AppSetting> setting, IServiceScopeFactory serviceScopeFactory)
+    public PushNotiConsumerService(
+        ILogger<MultipleSMSConsumerService> logger,
+        IOptions<AppSetting> setting,
+        IServiceScopeFactory serviceScopeFactory
+    )
     {
         _logger = logger;
         _appSetting = setting.Value;
@@ -23,7 +27,7 @@ public class PushNotiConsumerService : BackgroundService
         {
             BootstrapServers = _appSetting.Kafka.BootstrapServers,
             GroupId = _appSetting.Kafka.PushNotification.GroupId,
-            AutoOffsetReset = AutoOffsetReset.Earliest
+            AutoOffsetReset = AutoOffsetReset.Earliest,
         };
 
         _consumer = new ConsumerBuilder<Ignore, string>(consumerConfig).Build();
@@ -33,7 +37,10 @@ public class PushNotiConsumerService : BackgroundService
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.PushNotification.Topic);
+        await Extension.EnsureTopicExistsAsync(
+            _appSetting.Kafka.BootstrapServers,
+            _appSetting.Kafka.PushNotification.Topic
+        );
         _consumer.Subscribe(_appSetting.Kafka.PushNotification.Topic);
 
         while (!stoppingToken.IsCancellationRequested)
