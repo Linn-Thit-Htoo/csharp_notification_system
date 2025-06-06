@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace notification_system.notification.Features.PushNoti;
+﻿namespace notification_system.notification.Features.PushNoti;
 
 public class PushNotiRequest
 {
