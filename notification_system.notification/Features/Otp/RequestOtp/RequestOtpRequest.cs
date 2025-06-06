@@ -1,7 +1,6 @@
-﻿namespace notification_system.notification.Features.Otp.RequestOtp
+﻿namespace notification_system.notification.Features.Otp.RequestOtp;
+
+public class RequestOtpRequest
 {
-    public class RequestOtpRequest
-    {
-        public string Email { get; set; }
-    }
+    public string Email { get; set; }
 }
