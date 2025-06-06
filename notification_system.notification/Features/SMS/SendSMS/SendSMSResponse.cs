@@ -1,5 +1,3 @@
 ﻿namespace notification_system.notification.Features.SMS.SendSMS;
 
-public class SendSMSResponse
-{
-}
+public class SendSMSResponse { }
