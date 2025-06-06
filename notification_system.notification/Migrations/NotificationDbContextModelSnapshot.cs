@@ -8,185 +8,184 @@ using notification_system.notification.Entities;
 
 #nullable disable
 
-namespace notification_system.notification.Migrations
+namespace notification_system.notification.Migrations;
+
+[DbContext(typeof(NotificationDbContext))]
+partial class NotificationDbContextModelSnapshot : ModelSnapshot
 {
-    [DbContext(typeof(NotificationDbContext))]
-    partial class NotificationDbContextModelSnapshot : ModelSnapshot
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+        modelBuilder
+            .HasAnnotation("ProductVersion", "9.0.5")
+            .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+        SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("notification_system.notification.Entities.TblEmailTemplate", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+        modelBuilder.Entity("notification_system.notification.Entities.TblEmailTemplate", b =>
+            {
+                b.Property<string>("Id")
+                    .HasMaxLength(50)
+                    .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("BccEmailList")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("BCcEmailList");
+                b.Property<string>("BccEmailList")
+                    .HasColumnType("nvarchar(max)")
+                    .HasColumnName("BCcEmailList");
 
-                    b.Property<string>("BodyContent")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("BodyContent")
+                    .IsRequired()
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CcEmailList")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CcEmailList")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContentType")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasComment("Rich Text, HTML");
+                b.Property<string>("ContentType")
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .HasColumnType("nvarchar(10)")
+                    .HasComment("Rich Text, HTML");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("(getdate())");
+                b.Property<DateTime>("CreatedAt")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime?>("DeletedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsDeleted")
+                    .HasColumnType("bit");
 
-                    b.Property<bool>("IsEnabled")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsEnabled")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                b.Property<string>("Subject")
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("TemplateName")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                b.Property<string>("TemplateName")
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .HasColumnType("nvarchar(150)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime?>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Tbl_Email_Templates", (string)null);
-                });
+                b.ToTable("Tbl_Email_Templates", (string)null);
+            });
 
-            modelBuilder.Entity("notification_system.notification.Entities.TblNotificationLog", b =>
-                {
-                    b.Property<string>("LogId")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+        modelBuilder.Entity("notification_system.notification.Entities.TblNotificationLog", b =>
+            {
+                b.Property<string>("LogId")
+                    .HasMaxLength(50)
+                    .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("BccEmailList")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("BCcEmailList");
+                b.Property<string>("BccEmailList")
+                    .HasColumnType("nvarchar(max)")
+                    .HasColumnName("BCcEmailList");
 
-                    b.Property<string>("CcEmailList")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("CcEmailList")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("(getdate())");
+                b.Property<DateTime>("CreatedAt")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                    b.Property<bool?>("IsSuccess")
-                        .HasColumnType("bit");
+                b.Property<bool?>("IsSuccess")
+                    .HasColumnType("bit");
 
-                    b.Property<string>("LogType")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                b.Property<string>("LogType")
+                    .IsRequired()
+                    .HasMaxLength(10)
+                    .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("Payload")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("Payload")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("ResponseAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime?>("ResponseAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<string>("ResponseMessage")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ResponseMessage")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ToEmailList")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ToEmailList")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ToPhoneList")
-                        .HasColumnType("nvarchar(max)");
+                b.Property<string>("ToPhoneList")
+                    .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("LogId");
+                b.HasKey("LogId");
 
-                    b.ToTable("Tbl_Notification_Logs", (string)null);
-                });
+                b.ToTable("Tbl_Notification_Logs", (string)null);
+            });
 
-            modelBuilder.Entity("notification_system.notification.Entities.TblOtp", b =>
-                {
-                    b.Property<string>("OtpId")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+        modelBuilder.Entity("notification_system.notification.Entities.TblOtp", b =>
+            {
+                b.Property<string>("OtpId")
+                    .HasMaxLength(50)
+                    .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("(getdate())");
+                b.Property<DateTime>("CreatedAt")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                b.Property<string>("Email")
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("ExpiredAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime>("ExpiredAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsDeleted")
+                    .HasColumnType("bit");
 
-                    b.Property<int>("OtpValue")
-                        .HasColumnType("int");
+                b.Property<int>("OtpValue")
+                    .HasColumnType("int");
 
-                    b.HasKey("OtpId");
+                b.HasKey("OtpId");
 
-                    b.ToTable("Tbl_Otp", (string)null);
-                });
+                b.ToTable("Tbl_Otp", (string)null);
+            });
 
-            modelBuilder.Entity("notification_system.notification.Entities.TblSmsTemplate", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(10)
-                        .HasColumnType("nchar(10)")
-                        .IsFixedLength();
+        modelBuilder.Entity("notification_system.notification.Entities.TblSmsTemplate", b =>
+            {
+                b.Property<string>("Id")
+                    .HasMaxLength(10)
+                    .HasColumnType("nchar(10)")
+                    .IsFixedLength();
 
-                    b.Property<string>("BodyContent")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
+                b.Property<string>("BodyContent")
+                    .IsRequired()
+                    .HasMaxLength(300)
+                    .HasColumnType("nvarchar(300)");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime")
-                        .HasDefaultValueSql("(getdate())");
+                b.Property<DateTime>("CreatedAt")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime?>("DeletedAt")
+                    .HasColumnType("datetime");
 
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsDeleted")
+                    .HasColumnType("bit");
 
-                    b.Property<bool>("IsEnabled")
-                        .HasColumnType("bit");
+                b.Property<bool>("IsEnabled")
+                    .HasColumnType("bit");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime");
+                b.Property<DateTime?>("UpdatedAt")
+                    .HasColumnType("datetime");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("Tbl_SMS_Templates", (string)null);
-                });
+                b.ToTable("Tbl_SMS_Templates", (string)null);
+            });
 #pragma warning restore 612, 618
-        }
     }
 }
