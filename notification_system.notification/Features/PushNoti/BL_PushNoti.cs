@@ -33,7 +33,7 @@ public class BL_PushNoti
 
         result = await _pushNotiService.PushNotiAsync(request, cs);
 
-        result:
+    result:
         return result;
     }
 }
