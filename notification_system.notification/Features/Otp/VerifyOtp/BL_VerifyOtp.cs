@@ -32,7 +32,7 @@ public class BL_VerifyOtp
 
         result = await _dA_VerifyOtp.VerifyOtpAsync(request, cs);
 
-        result:
+    result:
         return result;
     }
 }
