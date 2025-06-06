@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace notification_system.notification.Persistence.Base;
 
-public interface IRepositoryBase<T> where T : class
+public interface IRepositoryBase<T>
+    where T : class
 {
     IQueryable<T> GetAll();
     IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression);
