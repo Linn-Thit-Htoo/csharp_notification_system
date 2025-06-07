@@ -3,7 +3,6 @@ using Microsoft.Extensions.Options;
 using notification_system.notification.Configurations;
 using notification_system.notification.Extensions;
 using notification_system.notification.Features.SMS.SendSMS;
-using notification_system.notification.Services.EmailServices;
 using notification_system.notification.Services.SMSServices;
 using static notification_system.notification.Extensions.Extension;
 
