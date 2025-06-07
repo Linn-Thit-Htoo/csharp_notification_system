@@ -6,53 +6,52 @@ using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Services.EmailServices;
 using static notification_system.notification.Extensions.Extension;
 
-namespace notification_system.notification.Services.Kafka
+namespace notification_system.notification.Services.Kafka;
+
+public class SingleEmailConsumerService : BackgroundService
 {
-    public class SingleEmailConsumerService : BackgroundService
+    private readonly IConsumer<Ignore, string> _consumer;
+    private readonly ILogger<SingleEmailConsumerService> _logger;
+    private readonly AppSetting _appSetting;
+    private readonly IServiceScopeFactory _serviceScopeFactory;
+
+    public SingleEmailConsumerService(ILogger<SingleEmailConsumerService> logger, IOptions<AppSetting> setting, IServiceScopeFactory serviceScopeFactory)
     {
-        private readonly IConsumer<Ignore, string> _consumer;
-        private readonly ILogger<SingleEmailConsumerService> _logger;
-        private readonly AppSetting _appSetting;
-        private readonly IServiceScopeFactory _serviceScopeFactory;
+        _logger = logger;
+        _appSetting = setting.Value;
 
-        public SingleEmailConsumerService(ILogger<SingleEmailConsumerService> logger, IOptions<AppSetting> setting, IServiceScopeFactory serviceScopeFactory)
+        var consumerConfig = new ConsumerConfig
         {
-            _logger = logger;
-            _appSetting = setting.Value;
+            BootstrapServers = _appSetting.Kafka.BootstrapServers,
+            GroupId = _appSetting.Kafka.Email.SingleEmail.GroupId,
+            AutoOffsetReset = AutoOffsetReset.Earliest
+        };
 
-            var consumerConfig = new ConsumerConfig
-            {
-                BootstrapServers = _appSetting.Kafka.BootstrapServers,
-                GroupId = _appSetting.Kafka.Email.SingleEmail.GroupId,
-                AutoOffsetReset = AutoOffsetReset.Earliest
-            };
+        _consumer = new ConsumerBuilder<Ignore, string>(consumerConfig).Build();
+        _serviceScopeFactory = serviceScopeFactory;
+    }
 
-            _consumer = new ConsumerBuilder<Ignore, string>(consumerConfig).Build();
-            _serviceScopeFactory = serviceScopeFactory;
-        }
+    protected async override Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.Email.SingleEmail.Topic);
+        _consumer.Subscribe(_appSetting.Kafka.Email.SingleEmail.Topic);
 
-        protected async override Task ExecuteAsync(CancellationToken stoppingToken)
+        while (!stoppingToken.IsCancellationRequested)
         {
-            await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.Email.SingleEmail.Topic);
-            _consumer.Subscribe(_appSetting.Kafka.Email.SingleEmail.Topic);
-
-            while (!stoppingToken.IsCancellationRequested)
+            try
             {
-                try
-                {
-                    var scope = _serviceScopeFactory.CreateScope();
-                    var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
-                    var consumeResult = _consumer.Consume(stoppingToken);
-                    var message = consumeResult.Message.Value;
-                    var request = message.ToObject<SendEmailRequest>();
+                var scope = _serviceScopeFactory.CreateScope();
+                var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
+                var consumeResult = _consumer.Consume(stoppingToken);
+                var message = consumeResult.Message.Value;
+                var request = message.ToObject<SendEmailRequest>();
 
-                    await emailService.SendEmailAsync(request, stoppingToken);
-                    _logger.LogInformation($"Received Single Email Consumer: {message}");
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Error processing Single Email Consumer: {ex.Message}");
-                }
+                await emailService.SendEmailAsync(request, stoppingToken);
+                _logger.LogInformation($"Received Single Email Consumer: {message}");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error processing Single Email Consumer: {ex.Message}");
             }
         }
     }
