@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System.Text;
+using Microsoft.Extensions.Options;
 using notification_system.notification.Configurations;
 using notification_system.notification.Extensions;
 using notification_system.notification.Features.Email.SendEmail;
@@ -10,7 +11,6 @@ using notification_system.notification.Services.PushNoti;
 using notification_system.notification.Services.SMSServices;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System.Text;
 
 namespace notification_system.notification.Services.RabbitMQ;
 
@@ -20,7 +20,11 @@ public class RabbitMQService : BackgroundService
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly ILogger<RabbitMQService> _logger;
 
-    public RabbitMQService(IOptions<AppSetting> setting, IServiceScopeFactory serviceScopeFactory, ILogger<RabbitMQService> logger)
+    public RabbitMQService(
+        IOptions<AppSetting> setting,
+        IServiceScopeFactory serviceScopeFactory,
+        ILogger<RabbitMQService> logger
+    )
     {
         _setting = setting.Value;
         _serviceScopeFactory = serviceScopeFactory;
@@ -102,7 +106,7 @@ public class RabbitMQService : BackgroundService
             HostName = _setting.RabbitMQ.HostName,
             UserName = _setting.RabbitMQ.UserName,
             Password = _setting.RabbitMQ.Password,
-            VirtualHost = "/"
+            VirtualHost = "/",
         };
         connectionFactory.AutomaticRecoveryEnabled = true;
         connectionFactory.NetworkRecoveryInterval = TimeSpan.FromSeconds(5);
