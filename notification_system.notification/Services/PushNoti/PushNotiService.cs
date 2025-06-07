@@ -17,7 +17,10 @@ public class PushNotiService : IPushNotiService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<BaseResponse<PushNotiResponse>> PushNotiAsync(PushNotiRequest request, CancellationToken cs = default)
+    public async Task<BaseResponse<PushNotiResponse>> PushNotiAsync(
+        PushNotiRequest request,
+        CancellationToken cs = default
+    )
     {
         var message = new Message
         {
@@ -39,7 +42,7 @@ public class PushNotiService : IPushNotiService
                 {
                     Title = request.Title,
                     Body = request.Body,
-                    ImageUrl = request.ImageUrl
+                    ImageUrl = request.ImageUrl,
                 },
             },
             Apns = new ApnsConfig
