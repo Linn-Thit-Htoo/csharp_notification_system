@@ -17,14 +17,21 @@ public class TwilioService : ITwilioService
     private readonly ILogger<TwilioService> _logger;
     private readonly IUnitOfWork _unitOfWork;
 
-    public TwilioService(IOptions<AppSetting> setting, ILogger<TwilioService> logger, IUnitOfWork unitOfWork)
+    public TwilioService(
+        IOptions<AppSetting> setting,
+        ILogger<TwilioService> logger,
+        IUnitOfWork unitOfWork
+    )
     {
         _setting = setting.Value;
         _logger = logger;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task SendMultipleSMSAsync(SendMultipleSMSRequest request, CancellationToken cs = default)
+    public async Task SendMultipleSMSAsync(
+        SendMultipleSMSRequest request,
+        CancellationToken cs = default
+    )
     {
         try
         {
@@ -36,7 +43,7 @@ public class TwilioService : ITwilioService
                 ToPhoneList = request.ToPhoneNumbers.ToJson(),
                 Payload = request.Messasge,
                 CreatedAt = DateTime.Now,
-                LogType = NotificationTypeConstant.SMS
+                LogType = NotificationTypeConstant.SMS,
             };
 
             await _unitOfWork.NotificationLogRepository.AddAsync(notiLog, cs);
@@ -63,7 +70,10 @@ public class TwilioService : ITwilioService
         }
     }
 
-    public async Task SendSingleSMSAsync(SendSingleSMSRequest request, CancellationToken cs = default)
+    public async Task SendSingleSMSAsync(
+        SendSingleSMSRequest request,
+        CancellationToken cs = default
+    )
     {
         try
         {
@@ -75,7 +85,7 @@ public class TwilioService : ITwilioService
                 ToPhoneList = request.ToPhoneNumber.ToJson(),
                 Payload = request.Messasge,
                 CreatedAt = DateTime.Now,
-                LogType = NotificationTypeConstant.SMS
+                LogType = NotificationTypeConstant.SMS,
             };
             await _unitOfWork.NotificationLogRepository.AddAsync(notiLog, cs);
             await _unitOfWork.SaveChangesAsync(cs);
