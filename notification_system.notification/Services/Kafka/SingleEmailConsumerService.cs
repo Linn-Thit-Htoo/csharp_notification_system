@@ -15,7 +15,11 @@ public class SingleEmailConsumerService : BackgroundService
     private readonly AppSetting _appSetting;
     private readonly IServiceScopeFactory _serviceScopeFactory;
 
-    public SingleEmailConsumerService(ILogger<SingleEmailConsumerService> logger, IOptions<AppSetting> setting, IServiceScopeFactory serviceScopeFactory)
+    public SingleEmailConsumerService(
+        ILogger<SingleEmailConsumerService> logger,
+        IOptions<AppSetting> setting,
+        IServiceScopeFactory serviceScopeFactory
+    )
     {
         _logger = logger;
         _appSetting = setting.Value;
@@ -24,16 +28,19 @@ public class SingleEmailConsumerService : BackgroundService
         {
             BootstrapServers = _appSetting.Kafka.BootstrapServers,
             GroupId = _appSetting.Kafka.Email.SingleEmail.GroupId,
-            AutoOffsetReset = AutoOffsetReset.Earliest
+            AutoOffsetReset = AutoOffsetReset.Earliest,
         };
 
         _consumer = new ConsumerBuilder<Ignore, string>(consumerConfig).Build();
         _serviceScopeFactory = serviceScopeFactory;
     }
 
-    protected async override Task ExecuteAsync(CancellationToken stoppingToken)
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await Extension.EnsureTopicExistsAsync(_appSetting.Kafka.BootstrapServers, _appSetting.Kafka.Email.SingleEmail.Topic);
+        await Extension.EnsureTopicExistsAsync(
+            _appSetting.Kafka.BootstrapServers,
+            _appSetting.Kafka.Email.SingleEmail.Topic
+        );
         _consumer.Subscribe(_appSetting.Kafka.Email.SingleEmail.Topic);
 
         while (!stoppingToken.IsCancellationRequested)
