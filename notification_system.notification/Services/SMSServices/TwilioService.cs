@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Options;
-using Microsoft.Identity.Client;
 using notification_system.notification.Configurations;
 using notification_system.notification.Constants;
 using notification_system.notification.Entities;
