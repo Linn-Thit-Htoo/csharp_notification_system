@@ -16,7 +16,11 @@ public class EmailService : IEmailService
     private readonly ILogger<EmailService> _logger;
     private readonly IUnitOfWork _unitOfWork;
 
-    public EmailService(IOptions<AppSetting> setting, ILogger<EmailService> logger, IUnitOfWork unitOfWork)
+    public EmailService(
+        IOptions<AppSetting> setting,
+        ILogger<EmailService> logger,
+        IUnitOfWork unitOfWork
+    )
     {
         _setting = setting.Value;
         _logger = logger;
@@ -29,7 +33,13 @@ public class EmailService : IEmailService
         {
             var client = new SendGridClient(_setting.SendGrid.API_KEY);
             var from = new EmailAddress(_setting.SendGrid.FROM_EMAIL, _setting.SendGrid.FROM_NAME);
-            var msg = MailHelper.CreateSingleEmail(from, new EmailAddress(request.ToEmail), request.Subject, null, request.HtmlContent);
+            var msg = MailHelper.CreateSingleEmail(
+                from,
+                new EmailAddress(request.ToEmail),
+                request.Subject,
+                null,
+                request.HtmlContent
+            );
 
             if (request.CcEmail is not null)
             {
@@ -45,13 +55,15 @@ public class EmailService : IEmailService
             {
                 foreach (var file in request.Files)
                 {
-                    msg.AddAttachment(new Attachment
-                    {
-                        Content = Convert.ToBase64String(file.Content),
-                        Filename = file.FileName,
-                        Type = file.ContentType,
-                        Disposition = "attachment"
-                    });
+                    msg.AddAttachment(
+                        new Attachment
+                        {
+                            Content = Convert.ToBase64String(file.Content),
+                            Filename = file.FileName,
+                            Type = file.ContentType,
+                            Disposition = "attachment",
+                        }
+                    );
                 }
             }
 
@@ -60,14 +72,18 @@ public class EmailService : IEmailService
                 LogId = Ulid.NewUlid().ToString(),
                 LogType = NotificationTypeConstant.Email,
                 ToEmailList = JsonConvert.SerializeObject(request.ToEmail),
-                CcEmailList = request.CcEmail is not null ? JsonConvert.SerializeObject(request.CcEmail) : null,
-                BccEmailList = request.BccEmail is not null ? JsonConvert.SerializeObject(request.BccEmail) : null,
+                CcEmailList = request.CcEmail is not null
+                    ? JsonConvert.SerializeObject(request.CcEmail)
+                    : null,
+                BccEmailList = request.BccEmail is not null
+                    ? JsonConvert.SerializeObject(request.BccEmail)
+                    : null,
                 ToPhoneList = null,
                 Payload = JsonConvert.SerializeObject(request),
                 CreatedAt = DateTime.Now,
                 ResponseAt = null,
                 IsSuccess = null,
-                ResponseMessage = null
+                ResponseMessage = null,
             };
 
             await _unitOfWork.NotificationLogRepository.AddAsync(notiLog, cs);
@@ -77,7 +93,9 @@ public class EmailService : IEmailService
 
             notiLog.ResponseAt = DateTime.Now;
             notiLog.IsSuccess = response.IsSuccessStatusCode;
-            notiLog.ResponseMessage = response.Body is not null ? await response.Body.ReadAsStringAsync(cs) : null;
+            notiLog.ResponseMessage = response.Body is not null
+                ? await response.Body.ReadAsStringAsync(cs)
+                : null;
 
             _unitOfWork.NotificationLogRepository.Update(notiLog);
             await _unitOfWork.SaveChangesAsync(cs);
@@ -89,7 +107,10 @@ public class EmailService : IEmailService
         }
     }
 
-    public async Task SendMultipleEmailAysnc(SendMultipleEmailRequest request, CancellationToken cs = default)
+    public async Task SendMultipleEmailAysnc(
+        SendMultipleEmailRequest request,
+        CancellationToken cs = default
+    )
     {
         try
         {
@@ -99,7 +120,7 @@ public class EmailService : IEmailService
             {
                 From = from,
                 Subject = request.Subject,
-                HtmlContent = request.HtmlContent
+                HtmlContent = request.HtmlContent,
             };
 
             if (request.ToEmails is not null && request.ToEmails.Count > 0)
@@ -121,13 +142,15 @@ public class EmailService : IEmailService
             {
                 foreach (var file in request.Files)
                 {
-                    msg.AddAttachment(new Attachment
-                    {
-                        Content = Convert.ToBase64String(file.Content),
-                        Filename = file.FileName,
-                        Type = file.ContentType,
-                        Disposition = "attachment"
-                    });
+                    msg.AddAttachment(
+                        new Attachment
+                        {
+                            Content = Convert.ToBase64String(file.Content),
+                            Filename = file.FileName,
+                            Type = file.ContentType,
+                            Disposition = "attachment",
+                        }
+                    );
                 }
             }
 
@@ -136,21 +159,27 @@ public class EmailService : IEmailService
                 LogId = Ulid.NewUlid().ToString(),
                 LogType = NotificationTypeConstant.Email,
                 ToEmailList = JsonConvert.SerializeObject(request.ToEmails),
-                CcEmailList = request.CcEmails is not null ? JsonConvert.SerializeObject(request.CcEmails) : null,
-                BccEmailList = request.BccEmails is not null ? JsonConvert.SerializeObject(request.BccEmails) : null,
+                CcEmailList = request.CcEmails is not null
+                    ? JsonConvert.SerializeObject(request.CcEmails)
+                    : null,
+                BccEmailList = request.BccEmails is not null
+                    ? JsonConvert.SerializeObject(request.BccEmails)
+                    : null,
                 ToPhoneList = null,
                 Payload = JsonConvert.SerializeObject(request),
                 CreatedAt = DateTime.Now,
                 ResponseAt = null,
                 IsSuccess = null,
-                ResponseMessage = null
+                ResponseMessage = null,
             };
 
             var response = await client.SendEmailAsync(msg, cs);
 
             notiLog.ResponseAt = DateTime.Now;
             notiLog.IsSuccess = response.IsSuccessStatusCode;
-            notiLog.ResponseMessage = response.Body is not null ? await response.Body.ReadAsStringAsync(cs) : null;
+            notiLog.ResponseMessage = response.Body is not null
+                ? await response.Body.ReadAsStringAsync(cs)
+                : null;
 
             await _unitOfWork.NotificationLogRepository.AddAsync(notiLog, cs);
             await _unitOfWork.SaveChangesAsync(cs);
