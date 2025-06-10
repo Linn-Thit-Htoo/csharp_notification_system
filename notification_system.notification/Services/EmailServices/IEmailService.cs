@@ -1,10 +1,9 @@
 ﻿using notification_system.notification.Features.Email.SendEmail;
 
-namespace notification_system.notification.Services.EmailServices
+namespace notification_system.notification.Services.EmailServices;
+
+public interface IEmailService
 {
-    public interface IEmailService
-    {
-        Task SendEmailAsync(SendEmailRequest request, CancellationToken cs = default);
-        Task SendMultipleEmailAysnc(SendMultipleEmailRequest request, CancellationToken cs = default);
-    }
+    Task SendEmailAsync(SendEmailRequest request, CancellationToken cs = default);
+    Task SendMultipleEmailAysnc(SendMultipleEmailRequest request, CancellationToken cs = default);
 }
