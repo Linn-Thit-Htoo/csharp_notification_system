@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.DataProtection.KeyManagement;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using notification_system.notification.Configurations;
 using notification_system.notification.Constants;
