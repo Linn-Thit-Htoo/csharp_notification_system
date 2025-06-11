@@ -1,5 +1,4 @@
-﻿using Consul;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 
 namespace notification_system.gateway.Services.ServiceDiscovery;
 
