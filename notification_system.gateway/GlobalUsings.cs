@@ -1,1 +1,5 @@
-﻿
+﻿global using Consul;
+global using notification_system.gateway.Configurations;
+global using notification_system.gateway.Services.ServiceDiscovery;
+global using Ocelot.DependencyInjection;
+global using Ocelot.Provider.Consul;
