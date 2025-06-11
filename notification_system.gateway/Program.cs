@@ -1,5 +1,5 @@
-using notification_system.gateway.Extensions;
-using Ocelot.Middleware;
+global using notification_system.gateway.Extensions;
+global using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
