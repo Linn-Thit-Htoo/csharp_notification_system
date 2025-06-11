@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace notification_system.gateway.Services.ServiceDiscovery;
+﻿namespace notification_system.gateway.Services.ServiceDiscovery;
 
 public class ConsulService : IHostedService
 {
