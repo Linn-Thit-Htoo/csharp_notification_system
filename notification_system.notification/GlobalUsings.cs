@@ -26,3 +26,4 @@ global using notification_system.notification.Services.SMSServices;
 global using Serilog;
 global using Confluent.Kafka;
 global using Confluent.Kafka.Admin;
+global using notification_system.notification.Models;

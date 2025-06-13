@@ -1,6 +1,4 @@
-﻿global using notification_system.notification.Models;
-
-namespace notification_system.notification.Features.Email.SendEmail;
+﻿namespace notification_system.notification.Features.Email.SendEmail;
 
 public class SendMultipleEmailRequest
 {
