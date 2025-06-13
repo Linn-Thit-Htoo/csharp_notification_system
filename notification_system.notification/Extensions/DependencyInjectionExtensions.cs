@@ -1,27 +1,4 @@
-﻿global using Consul;
-global using FirebaseAdmin;
-global using FluentValidation;
-global using Google.Apis.Auth.OAuth2;
-global using Microsoft.AspNetCore.Mvc;
-global using Microsoft.Extensions.Options;
-global using notification_system.notification.Configurations;
-global using notification_system.notification.Entities;
-global using notification_system.notification.Exceptions;
-global using notification_system.notification.Features.Email.SendEmail;
-global using notification_system.notification.Features.Otp.RequestOtp;
-global using notification_system.notification.Features.Otp.VerifyOtp;
-global using notification_system.notification.Features.PushNoti;
-global using notification_system.notification.Features.SMS.SendSMS;
-global using notification_system.notification.Persistence.Wrapper;
-global using notification_system.notification.Services.EmailServices;
-global using notification_system.notification.Services.Kafka;
-global using notification_system.notification.Services.PushNoti;
-global using notification_system.notification.Services.RabbitMQ;
-global using notification_system.notification.Services.ServiceDiscovery;
-global using notification_system.notification.Services.SMSServices;
-global using Serilog;
-
-namespace notification_system.notification.Extensions;
+﻿namespace notification_system.notification.Extensions;
 
 public static class DependencyInjectionExtensions
 {
