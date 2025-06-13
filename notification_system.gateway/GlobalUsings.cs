@@ -1,5 +1,3 @@
 ﻿namespace notification_system.gateway;
 
-public class GlobalUsings
-{
-}
+public class GlobalUsings { }
