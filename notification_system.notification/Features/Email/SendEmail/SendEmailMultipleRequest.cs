@@ -1,4 +1,4 @@
-﻿using notification_system.notification.Models;
+﻿global using notification_system.notification.Models;
 
 namespace notification_system.notification.Features.Email.SendEmail;
 
