@@ -1,6 +1,3 @@
-using notification_system.gateway.Extensions;
-using Ocelot.Middleware;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistence(builder);

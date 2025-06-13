@@ -1,10 +1,4 @@
-﻿using Consul;
-using notification_system.gateway.Configurations;
-using notification_system.gateway.Services.ServiceDiscovery;
-using Ocelot.DependencyInjection;
-using Ocelot.Provider.Consul;
-
-namespace notification_system.gateway.Extensions;
+﻿namespace notification_system.gateway.Extensions;
 
 public static class DependencyInjectionExtensions
 {
