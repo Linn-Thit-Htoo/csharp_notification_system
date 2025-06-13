@@ -1,6 +1,5 @@
 ﻿using Confluent.Kafka;
 using Confluent.Kafka.Admin;
-using Newtonsoft.Json;
 
 namespace notification_system.notification.Extensions;
 
