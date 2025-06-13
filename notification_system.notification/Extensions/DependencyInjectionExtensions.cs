@@ -19,7 +19,6 @@ using notification_system.notification.Services.PushNoti;
 using notification_system.notification.Services.RabbitMQ;
 using notification_system.notification.Services.ServiceDiscovery;
 using notification_system.notification.Services.SMSServices;
-using notification_system.notification.Utils;
 using Serilog;
 
 namespace notification_system.notification.Extensions;
