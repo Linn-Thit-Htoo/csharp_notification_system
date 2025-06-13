@@ -1,5 +1,4 @@
-﻿
-namespace notification_system.notification.Features.Email.Core;
+﻿namespace notification_system.notification.Features.Email.Core;
 
 [Route("api/v1/[controller]")]
 [ApiController]
