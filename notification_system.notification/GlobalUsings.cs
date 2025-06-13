@@ -1,5 +1,3 @@
 ﻿namespace notification_system.notification;
 
-public class GlobalUsings
-{
-}
+public class GlobalUsings { }
