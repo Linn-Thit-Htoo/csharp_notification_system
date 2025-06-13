@@ -1,6 +1,4 @@
-﻿global using Microsoft.EntityFrameworkCore;
-
-namespace notification_system.notification.Entities;
+﻿namespace notification_system.notification.Entities;
 
 public partial class NotificationDbContext : DbContext
 {
