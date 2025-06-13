@@ -1,5 +1,5 @@
-﻿using Confluent.Kafka;
-using Confluent.Kafka.Admin;
+﻿global using Confluent.Kafka;
+global using Confluent.Kafka.Admin;
 
 namespace notification_system.notification.Extensions;
 
