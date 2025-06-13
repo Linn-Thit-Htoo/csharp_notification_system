@@ -24,3 +24,5 @@ global using notification_system.notification.Services.RabbitMQ;
 global using notification_system.notification.Services.ServiceDiscovery;
 global using notification_system.notification.Services.SMSServices;
 global using Serilog;
+global using Confluent.Kafka;
+global using Confluent.Kafka.Admin;

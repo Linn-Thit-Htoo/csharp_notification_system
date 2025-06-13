@@ -1,7 +1,4 @@
-﻿global using Confluent.Kafka;
-global using Confluent.Kafka.Admin;
-
-namespace notification_system.notification.Extensions;
+﻿namespace notification_system.notification.Extensions;
 
 public static class Extension
 {
