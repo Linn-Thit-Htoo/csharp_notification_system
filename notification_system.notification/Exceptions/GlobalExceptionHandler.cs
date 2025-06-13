@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
-using Newtonsoft.Json;
-using notification_system.notification.Utils;
+﻿global using Microsoft.AspNetCore.Diagnostics;
+global using Newtonsoft.Json;
+global using notification_system.notification.Utils;
 
 namespace notification_system.notification.Exceptions;
 
