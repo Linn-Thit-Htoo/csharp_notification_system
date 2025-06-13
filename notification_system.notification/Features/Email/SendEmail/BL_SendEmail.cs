@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using notification_system.notification.Services.EmailServices;
 
 namespace notification_system.notification.Features.Email.SendEmail;
 
