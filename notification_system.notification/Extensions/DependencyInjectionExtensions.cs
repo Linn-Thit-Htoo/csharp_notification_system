@@ -3,7 +3,6 @@ using FirebaseAdmin;
 using FluentValidation;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using notification_system.notification.Configurations;
 using notification_system.notification.Entities;
