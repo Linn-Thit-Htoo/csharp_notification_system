@@ -1,6 +1,4 @@
-﻿global using System.Security.Cryptography;
-
-namespace notification_system.notification.Features.Otp.RequestOtp;
+﻿namespace notification_system.notification.Features.Otp.RequestOtp;
 
 public class DA_RequestOtp
 {
