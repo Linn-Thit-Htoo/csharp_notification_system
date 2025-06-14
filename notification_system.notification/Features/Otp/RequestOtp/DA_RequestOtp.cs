@@ -1,4 +1,4 @@
-﻿using System.Security.Cryptography;
+﻿global using System.Security.Cryptography;
 
 namespace notification_system.notification.Features.Otp.RequestOtp;
 
