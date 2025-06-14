@@ -1,5 +1,4 @@
-﻿
-namespace notification_system.notification.Features.NotificationLogs.Core;
+﻿namespace notification_system.notification.Features.NotificationLogs.Core;
 
 public class NotificationLogRepository
     : RepositoryBase<TblNotificationLog>,
