@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using notification_system.notification.Utils;
+﻿using notification_system.notification.Utils;
 
 namespace notification_system.notification.Features.Otp.VerifyOtp;
 
