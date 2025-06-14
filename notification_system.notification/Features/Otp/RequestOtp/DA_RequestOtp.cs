@@ -1,5 +1,4 @@
 ﻿using System.Security.Cryptography;
-using notification_system.notification.Entities;
 using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Utils;
 
