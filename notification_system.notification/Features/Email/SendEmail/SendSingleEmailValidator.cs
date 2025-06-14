@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-
-namespace notification_system.notification.Features.Email.SendEmail;
+﻿namespace notification_system.notification.Features.Email.SendEmail;
 
 public class SendSingleEmailValidator : AbstractValidator<SendEmailRequest>
 {
