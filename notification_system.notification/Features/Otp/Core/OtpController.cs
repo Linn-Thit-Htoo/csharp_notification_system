@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using notification_system.notification.Features.Otp.RequestOtp;
-using notification_system.notification.Features.Otp.VerifyOtp;
-
-namespace notification_system.notification.Features.Otp.Core;
+﻿namespace notification_system.notification.Features.Otp.Core;
 
 [Route("api/v1/[controller]")]
 [ApiController]
