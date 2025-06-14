@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using notification_system.notification.Entities;
 
 namespace notification_system.notification.Features.Otp.Core;
 
