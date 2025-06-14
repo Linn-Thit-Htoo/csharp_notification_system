@@ -1,5 +1,4 @@
 ﻿using System.Security.Cryptography;
-using notification_system.notification.Utils;
 
 namespace notification_system.notification.Features.Otp.RequestOtp;
 
