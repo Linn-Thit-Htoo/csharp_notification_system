@@ -27,3 +27,4 @@ global using Serilog;
 global using Confluent.Kafka;
 global using Confluent.Kafka.Admin;
 global using notification_system.notification.Models;
+global using notification_system.notification.Persistence.Base;

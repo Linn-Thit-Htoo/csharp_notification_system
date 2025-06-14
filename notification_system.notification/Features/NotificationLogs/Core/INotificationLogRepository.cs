@@ -1,5 +1,3 @@
-﻿global using notification_system.notification.Persistence.Base;
-
-namespace notification_system.notification.Features.NotificationLogs.Core;
+﻿namespace notification_system.notification.Features.NotificationLogs.Core;
 
 public interface INotificationLogRepository : IRepositoryBase<TblNotificationLog> { }
