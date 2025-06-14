@@ -1,5 +1,4 @@
-﻿
-namespace notification_system.notification.Features.Otp.Core;
+﻿namespace notification_system.notification.Features.Otp.Core;
 
 public class OtpRepository : RepositoryBase<TblOtp>, IOtpRepository
 {
