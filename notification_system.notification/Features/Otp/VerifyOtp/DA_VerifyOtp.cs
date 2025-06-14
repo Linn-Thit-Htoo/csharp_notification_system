@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using notification_system.notification.Persistence.Wrapper;
+﻿using notification_system.notification.Persistence.Wrapper;
 using notification_system.notification.Utils;
 
 namespace notification_system.notification.Features.Otp.VerifyOtp;
