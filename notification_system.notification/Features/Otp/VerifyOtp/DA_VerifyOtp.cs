@@ -1,5 +1,4 @@
-﻿
-namespace notification_system.notification.Features.Otp.VerifyOtp;
+﻿namespace notification_system.notification.Features.Otp.VerifyOtp;
 
 public class DA_VerifyOtp
 {
