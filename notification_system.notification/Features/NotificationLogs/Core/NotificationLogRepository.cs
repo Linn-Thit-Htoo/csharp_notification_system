@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
+﻿
 namespace notification_system.notification.Features.NotificationLogs.Core;
 
 public class NotificationLogRepository
