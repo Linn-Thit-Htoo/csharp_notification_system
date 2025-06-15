@@ -1,10 +1,4 @@
 ﻿using FirebaseAdmin.Messaging;
-using notification_system.notification.Constants;
-using notification_system.notification.Entities;
-using notification_system.notification.Extensions;
-using notification_system.notification.Features.PushNoti;
-using notification_system.notification.Persistence.Wrapper;
-using notification_system.notification.Utils;
 
 namespace notification_system.notification.Services.PushNoti;
 
