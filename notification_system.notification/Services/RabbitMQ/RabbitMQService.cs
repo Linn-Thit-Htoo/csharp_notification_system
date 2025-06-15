@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using notification_system.notification.Services.EmailServices;
-using notification_system.notification.Services.PushNoti;
 using notification_system.notification.Services.SMSServices;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
