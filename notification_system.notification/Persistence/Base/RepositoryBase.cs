@@ -1,5 +1,4 @@
-﻿using System.Linq.Expressions;
-
+﻿
 namespace notification_system.notification.Persistence.Base;
 
 public class RepositoryBase<T> : IRepositoryBase<T>
