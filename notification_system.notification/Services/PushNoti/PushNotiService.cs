@@ -1,6 +1,4 @@
-﻿global using FirebaseAdmin.Messaging;
-
-namespace notification_system.notification.Services.PushNoti;
+﻿namespace notification_system.notification.Services.PushNoti;
 
 public class PushNotiService : IPushNotiService
 {

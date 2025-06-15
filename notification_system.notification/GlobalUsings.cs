@@ -45,3 +45,4 @@ global using notification_system.notification.Constants;
 global using SendGrid;
 global using SendGrid.Helpers.Mail;
 global using static notification_system.notification.Extensions.Extension;
+global using FirebaseAdmin.Messaging;
