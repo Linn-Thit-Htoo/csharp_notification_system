@@ -1,8 +1,4 @@
-﻿using Twilio;
-using Twilio.Rest.Api.V2010.Account;
-using Twilio.Types;
-
-namespace notification_system.notification.Services.SMSServices;
+﻿namespace notification_system.notification.Services.SMSServices;
 
 public class TwilioService : ITwilioService
 {

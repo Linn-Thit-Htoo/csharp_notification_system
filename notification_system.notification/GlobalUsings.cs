@@ -49,3 +49,6 @@ global using FirebaseAdmin.Messaging;
 global using System.Text;
 global using RabbitMQ.Client;
 global using RabbitMQ.Client.Events;
+global using Twilio;
+global using Twilio.Rest.Api.V2010.Account;
+global using Twilio.Types;
