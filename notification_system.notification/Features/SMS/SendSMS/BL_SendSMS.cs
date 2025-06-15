@@ -1,5 +1,4 @@
 ﻿using notification_system.notification.Extensions;
-using notification_system.notification.Services.SMSServices;
 
 namespace notification_system.notification.Features.SMS.SendSMS;
 
