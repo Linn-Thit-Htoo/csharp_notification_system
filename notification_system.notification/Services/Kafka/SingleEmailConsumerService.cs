@@ -2,7 +2,6 @@
 using Microsoft.Extensions.Options;
 using notification_system.notification.Extensions;
 using notification_system.notification.Features.Email.SendEmail;
-using static notification_system.notification.Extensions.Extension;
 
 namespace notification_system.notification.Services.Kafka;
 
