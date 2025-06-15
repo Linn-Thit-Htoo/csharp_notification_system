@@ -1,5 +1,4 @@
-﻿using notification_system.notification.Services.PushNoti;
-
+﻿
 namespace notification_system.notification.Services.Kafka;
 
 public class PushNotiConsumerService : BackgroundService
