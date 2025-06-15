@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using notification_system.notification.Configurations;
 using notification_system.notification.Constants;
 using notification_system.notification.Entities;
