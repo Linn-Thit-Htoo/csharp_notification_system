@@ -31,4 +31,7 @@ global using notification_system.notification.Persistence.Base;
 global using System.Security.Cryptography;
 global using notification_system.notification.Extensions;
 global using Microsoft.EntityFrameworkCore.Migrations;
-
+global using System;
+global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Microsoft.EntityFrameworkCore.Metadata;
+global using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
