@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace notification_system.notification.Features.SMS.Core;
 
 [Route("api/v1/[controller]")]
