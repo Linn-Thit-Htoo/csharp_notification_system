@@ -1,4 +1,4 @@
-﻿using System.Net;
+﻿global using System.Net;
 
 namespace notification_system.notification.Utils;
 
