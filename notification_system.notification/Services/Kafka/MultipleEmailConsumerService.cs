@@ -1,5 +1,4 @@
-﻿using notification_system.notification.Services.EmailServices;
-using static notification_system.notification.Extensions.Extension;
+﻿using static notification_system.notification.Extensions.Extension;
 
 namespace notification_system.notification.Services.Kafka;
 
