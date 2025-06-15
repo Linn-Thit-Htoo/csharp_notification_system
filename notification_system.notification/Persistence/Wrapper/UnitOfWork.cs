@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Security.Claims;
-using Microsoft.EntityFrameworkCore;
 using notification_system.notification.Entities;
 using notification_system.notification.Features.NotificationLogs.Core;
 using notification_system.notification.Features.Otp.Core;
