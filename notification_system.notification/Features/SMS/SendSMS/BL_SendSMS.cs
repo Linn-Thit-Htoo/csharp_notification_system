@@ -1,4 +1,4 @@
-﻿using notification_system.notification.Extensions;
+﻿global using notification_system.notification.Extensions;
 
 namespace notification_system.notification.Features.SMS.SendSMS;
 
