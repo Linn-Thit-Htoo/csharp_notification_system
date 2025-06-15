@@ -36,4 +36,6 @@ global using Microsoft.EntityFrameworkCore.Infrastructure;
 global using Microsoft.EntityFrameworkCore.Metadata;
 global using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 global using System.Linq.Expressions;
+global using notification_system.notification.Features.NotificationLogs.Core;
+global using notification_system.notification.Features.Otp.Core;
 global using Microsoft.EntityFrameworkCore.Query;

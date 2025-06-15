@@ -1,7 +1,4 @@
-﻿global using notification_system.notification.Features.NotificationLogs.Core;
-global using notification_system.notification.Features.Otp.Core;
-
-namespace notification_system.notification.Persistence.Wrapper;
+﻿namespace notification_system.notification.Persistence.Wrapper;
 
 public interface IUnitOfWork
 {
