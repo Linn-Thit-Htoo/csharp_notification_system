@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿global using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
