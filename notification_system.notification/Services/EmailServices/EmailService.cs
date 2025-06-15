@@ -1,5 +1,4 @@
-﻿using notification_system.notification.Configurations;
-using notification_system.notification.Constants;
+﻿using notification_system.notification.Constants;
 using notification_system.notification.Entities;
 using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Persistence.Wrapper;
