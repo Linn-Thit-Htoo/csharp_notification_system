@@ -1,5 +1,4 @@
-﻿using static notification_system.notification.Extensions.Extension;
-
+﻿
 namespace notification_system.notification.Services.Kafka;
 
 public class MultipleSMSConsumerService : BackgroundService
