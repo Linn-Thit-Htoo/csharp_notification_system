@@ -1,8 +1,4 @@
-﻿using System.Security.Claims;
-using notification_system.notification.Models;
-using Serilog;
-
-namespace notification_system.notification.Utils;
+﻿namespace notification_system.notification.Utils;
 
 public class Enricher
 {
