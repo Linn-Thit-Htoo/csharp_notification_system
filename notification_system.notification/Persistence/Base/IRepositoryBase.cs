@@ -1,5 +1,5 @@
-﻿using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore.Query;
+﻿global using System.Linq.Expressions;
+global using Microsoft.EntityFrameworkCore.Query;
 
 namespace notification_system.notification.Persistence.Base;
 
