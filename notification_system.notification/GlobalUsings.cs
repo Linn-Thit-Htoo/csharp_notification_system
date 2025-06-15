@@ -41,3 +41,6 @@ global using notification_system.notification.Features.Otp.Core;
 global using Microsoft.EntityFrameworkCore.Query;
 global using System.Reflection;
 global using System.Security.Claims;
+global using notification_system.notification.Constants;
+global using SendGrid;
+global using SendGrid.Helpers.Mail;

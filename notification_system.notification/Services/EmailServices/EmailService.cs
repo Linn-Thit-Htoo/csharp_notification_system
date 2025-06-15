@@ -1,8 +1,4 @@
-﻿global using notification_system.notification.Constants;
-global using SendGrid;
-global using SendGrid.Helpers.Mail;
-
-namespace notification_system.notification.Services.EmailServices;
+﻿namespace notification_system.notification.Services.EmailServices;
 
 public class EmailService : IEmailService
 {
