@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using notification_system.notification.Extensions;
 
 namespace notification_system.notification.Features;
 
