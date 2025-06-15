@@ -30,4 +30,5 @@ global using notification_system.notification.Models;
 global using notification_system.notification.Persistence.Base;
 global using System.Security.Cryptography;
 global using notification_system.notification.Extensions;
+global using Microsoft.EntityFrameworkCore.Migrations;
 
