@@ -1,5 +1,4 @@
-﻿
-namespace notification_system.notification.Features.PushNoti;
+﻿namespace notification_system.notification.Features.PushNoti;
 
 [Route("api/v1/[controller]")]
 [ApiController]
