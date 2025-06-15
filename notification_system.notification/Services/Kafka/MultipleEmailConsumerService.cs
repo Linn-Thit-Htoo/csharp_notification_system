@@ -1,4 +1,4 @@
-﻿using static notification_system.notification.Extensions.Extension;
+﻿global using static notification_system.notification.Extensions.Extension;
 
 namespace notification_system.notification.Services.Kafka;
 
