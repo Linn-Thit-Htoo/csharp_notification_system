@@ -1,5 +1,4 @@
-﻿using notification_system.notification.Features.Email.SendEmail;
-
+﻿
 namespace notification_system.notification.Services.EmailServices;
 
 public interface IEmailService
