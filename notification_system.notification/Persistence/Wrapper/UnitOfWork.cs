@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using System.Security.Claims;
-using notification_system.notification.Features.Otp.Core;
 
 namespace notification_system.notification.Persistence.Wrapper;
 
