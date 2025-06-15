@@ -1,7 +1,6 @@
 ﻿using Confluent.Kafka;
 using Microsoft.Extensions.Options;
 using notification_system.notification.Extensions;
-using notification_system.notification.Features.Email.SendEmail;
 
 namespace notification_system.notification.Services.Kafka;
 
