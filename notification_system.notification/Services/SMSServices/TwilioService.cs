@@ -1,11 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-using notification_system.notification.Configurations;
-using notification_system.notification.Constants;
-using notification_system.notification.Entities;
-using notification_system.notification.Extensions;
-using notification_system.notification.Features.SMS.SendSMS;
-using notification_system.notification.Persistence.Wrapper;
-using Twilio;
+﻿using Twilio;
 using Twilio.Rest.Api.V2010.Account;
 using Twilio.Types;
 
