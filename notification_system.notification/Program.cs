@@ -1,7 +1,3 @@
-using notification_system.notification.Extensions;
-using notification_system.notification.Utils;
-using Serilog;
-
 var builder = WebApplication.CreateBuilder(args);
 
 Microsoft.Extensions.Logging.ILogger logger = LoggerFactory
