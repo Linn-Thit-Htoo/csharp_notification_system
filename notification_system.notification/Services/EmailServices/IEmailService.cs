@@ -1,5 +1,4 @@
-﻿
-namespace notification_system.notification.Services.EmailServices;
+﻿namespace notification_system.notification.Services.EmailServices;
 
 public interface IEmailService
 {
