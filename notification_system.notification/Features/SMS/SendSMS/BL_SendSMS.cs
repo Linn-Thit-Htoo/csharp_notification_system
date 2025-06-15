@@ -1,6 +1,4 @@
-﻿global using notification_system.notification.Extensions;
-
-namespace notification_system.notification.Features.SMS.SendSMS;
+﻿namespace notification_system.notification.Features.SMS.SendSMS;
 
 public class BL_SendSMS
 {
