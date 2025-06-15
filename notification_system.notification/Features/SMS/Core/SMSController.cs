@@ -1,5 +1,4 @@
-﻿
-namespace notification_system.notification.Features.SMS.Core;
+﻿namespace notification_system.notification.Features.SMS.Core;
 
 [Route("api/v1/[controller]")]
 [ApiController]
