@@ -1,6 +1,5 @@
 ﻿using Confluent.Kafka;
 using Microsoft.Extensions.Options;
-using notification_system.notification.Extensions;
 
 namespace notification_system.notification.Services.Kafka;
 
