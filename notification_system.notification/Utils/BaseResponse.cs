@@ -1,6 +1,4 @@
-﻿global using System.Net;
-
-namespace notification_system.notification.Utils;
+﻿namespace notification_system.notification.Utils;
 
 public class BaseResponse<T>
 {

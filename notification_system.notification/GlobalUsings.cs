@@ -52,3 +52,4 @@ global using RabbitMQ.Client.Events;
 global using Twilio;
 global using Twilio.Rest.Api.V2010.Account;
 global using Twilio.Types;
+global using System.Net;
