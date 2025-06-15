@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using notification_system.notification.Features.Email.SendEmail;
 using notification_system.notification.Features.PushNoti;
 using notification_system.notification.Features.SMS.SendSMS;
 using notification_system.notification.Persistence.Wrapper;
