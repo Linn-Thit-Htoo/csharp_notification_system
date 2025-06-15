@@ -1,4 +1,4 @@
-﻿using FirebaseAdmin.Messaging;
+﻿global using FirebaseAdmin.Messaging;
 
 namespace notification_system.notification.Services.PushNoti;
 
