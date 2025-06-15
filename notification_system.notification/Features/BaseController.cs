@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿
 namespace notification_system.notification.Features;
 
 [Route("api/[controller]")]
