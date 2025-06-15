@@ -1,7 +1,4 @@
-﻿global using System.Reflection;
-global using System.Security.Claims;
-
-namespace notification_system.notification.Persistence.Wrapper;
+﻿namespace notification_system.notification.Persistence.Wrapper;
 
 public class UnitOfWork : IUnitOfWork
 {

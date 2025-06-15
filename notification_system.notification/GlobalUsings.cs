@@ -39,3 +39,5 @@ global using System.Linq.Expressions;
 global using notification_system.notification.Features.NotificationLogs.Core;
 global using notification_system.notification.Features.Otp.Core;
 global using Microsoft.EntityFrameworkCore.Query;
+global using System.Reflection;
+global using System.Security.Claims;
