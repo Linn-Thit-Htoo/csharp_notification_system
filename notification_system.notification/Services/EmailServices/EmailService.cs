@@ -1,6 +1,6 @@
-﻿using notification_system.notification.Constants;
-using SendGrid;
-using SendGrid.Helpers.Mail;
+﻿global using notification_system.notification.Constants;
+global using SendGrid;
+global using SendGrid.Helpers.Mail;
 
 namespace notification_system.notification.Services.EmailServices;
 
