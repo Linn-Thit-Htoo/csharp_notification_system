@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using System.Security.Claims;
+﻿global using System.Reflection;
+global using System.Security.Claims;
 
 namespace notification_system.notification.Persistence.Wrapper;
 
