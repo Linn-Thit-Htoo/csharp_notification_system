@@ -1,5 +1,4 @@
-﻿
-namespace notification_system.notification.Features;
+﻿namespace notification_system.notification.Features;
 
 [Route("api/[controller]")]
 [ApiController]
