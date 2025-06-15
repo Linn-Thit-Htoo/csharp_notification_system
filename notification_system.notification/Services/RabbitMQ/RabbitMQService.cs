@@ -1,8 +1,4 @@
-﻿using System.Text;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-
-namespace notification_system.notification.Services.RabbitMQ;
+﻿namespace notification_system.notification.Services.RabbitMQ;
 
 public class RabbitMQService : BackgroundService
 {
