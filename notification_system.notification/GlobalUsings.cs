@@ -35,3 +35,5 @@ global using System;
 global using Microsoft.EntityFrameworkCore.Infrastructure;
 global using Microsoft.EntityFrameworkCore.Metadata;
 global using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+global using System.Linq.Expressions;
+global using Microsoft.EntityFrameworkCore.Query;

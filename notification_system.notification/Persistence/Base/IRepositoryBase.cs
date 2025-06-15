@@ -1,7 +1,4 @@
-﻿global using System.Linq.Expressions;
-global using Microsoft.EntityFrameworkCore.Query;
-
-namespace notification_system.notification.Persistence.Base;
+﻿namespace notification_system.notification.Persistence.Base;
 
 public interface IRepositoryBase<T>
     where T : class
