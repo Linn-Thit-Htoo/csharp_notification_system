@@ -1,5 +1,4 @@
-﻿
-namespace notification_system.notification.Persistence.Base;
+﻿namespace notification_system.notification.Persistence.Base;
 
 public class RepositoryBase<T> : IRepositoryBase<T>
     where T : class
