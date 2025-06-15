@@ -1,5 +1,5 @@
-﻿using notification_system.notification.Features.NotificationLogs.Core;
-using notification_system.notification.Features.Otp.Core;
+﻿global using notification_system.notification.Features.NotificationLogs.Core;
+global using notification_system.notification.Features.Otp.Core;
 
 namespace notification_system.notification.Persistence.Wrapper;
 
