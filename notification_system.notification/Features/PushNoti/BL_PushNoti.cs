@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using notification_system.notification.Services.PushNoti;
 
 namespace notification_system.notification.Features.PushNoti;
 
